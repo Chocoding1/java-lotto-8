@@ -18,7 +18,7 @@ public class InputView {
 
     public int getPurchasePrice() {
         printGetPurchasePriceView();
-        String initialPurchasePrice = getInitialPurchasePrice();
+        String initialPurchasePrice = getInputValue();
 
         int purchasePrice = convertToInt(initialPurchasePrice);
         validatePurchasePrice(purchasePrice);
@@ -26,11 +26,15 @@ public class InputView {
         return purchasePrice;
     }
 
+    public String getWinningNumbers() {
+        return getInputValue();
+    }
+
     private static void printGetPurchasePriceView() {
         System.out.println("구입금액을 입력해 주세요.");
     }
 
-    private static String getInitialPurchasePrice() {
+    private static String getInputValue() {
         return Console.readLine();
     }
 

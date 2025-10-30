@@ -2,7 +2,9 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.Lotto;
+import lotto.model.LottoNumber;
 import lotto.model.LottoService;
+import lotto.model.LottoParser;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -11,6 +13,7 @@ public class LottoController {
     private InputView inputView = InputView.getInstance();
     private OutputView outputView = OutputView.getInstance();
     private LottoService lottoService = LottoService.getInstance();
+    private LottoParser stringParser = LottoParser.getInstance();
 
     public void playLotto() {
         int purchasePrice = inputView.getPurchasePrice();
@@ -23,6 +26,9 @@ public class LottoController {
         outputView.printPublishedResult(lottos);
 
         // 당첨 번호 입력
+        String initialWinningNumbers = inputView.getWinningNumbers();
+        List<LottoNumber> winningLottoNumbers = stringParser.convertToLottoNumbers(initialWinningNumbers);
+
         //보너스 번호 입력
 
         // 번호 비교
