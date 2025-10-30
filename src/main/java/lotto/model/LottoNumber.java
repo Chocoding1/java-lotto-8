@@ -1,6 +1,6 @@
 package lotto.model;
 
-import lotto.view.InputView;
+import static lotto.model.LottoConstant.*;
 
 public class LottoNumber {
 
@@ -21,7 +21,7 @@ public class LottoNumber {
     }
 
     private void validateNumber(int number) {
-        if (number < 1 || 45 < number) {
+        if (number < MIN_NUMBER || MAX_NUMBER < number) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 1 ~ 45 사이의 숫자여야 합니다.");
         }
     }
