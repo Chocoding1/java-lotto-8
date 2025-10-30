@@ -13,7 +13,7 @@ public class LottoController {
     private InputView inputView = InputView.getInstance();
     private OutputView outputView = OutputView.getInstance();
     private LottoService lottoService = LottoService.getInstance();
-    private LottoParser stringParser = LottoParser.getInstance();
+    private LottoParser lottoParser = LottoParser.getInstance();
 
     public void playLotto() {
         int purchasePrice = inputView.getPurchasePrice();
@@ -27,9 +27,12 @@ public class LottoController {
 
         // 당첨 번호 입력
         String initialWinningNumbers = inputView.getWinningNumbers();
-        List<LottoNumber> winningLottoNumbers = stringParser.convertToLottoNumbers(initialWinningNumbers);
+        List<LottoNumber> winningLottoNumbers = lottoParser.convertToLottoNumbers(initialWinningNumbers);
 
         //보너스 번호 입력
+        String initialBonusNumber = inputView.getBonusNumber();
+        lottoService.checkDuplicate(initialBonusNumber, winningLottoNumbers);
+        LottoNumber bonusNumber = lottoParser.converToLottoNumber(initialBonusNumber);
 
         // 번호 비교
 

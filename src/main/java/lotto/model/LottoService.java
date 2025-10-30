@@ -36,4 +36,10 @@ public class LottoService {
     private int getLottoQuantity(int purchasePrice) {
         return purchasePrice / LOTTO_PRICE;
     }
+
+    public void checkDuplicate(String initialBonusNumber, List<LottoNumber> winningLottoNumbers) {
+        if (winningLottoNumbers.contains(new LottoNumber(initialBonusNumber))) {
+            throw new IllegalArgumentException("[ERROR] 당첨 번호와 중복된 번호입니다.");
+        }
+    }
 }

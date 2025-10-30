@@ -22,4 +22,8 @@ public class LottoParser {
                 .map(LottoNumber::new)
                 .toList();
     }
+
+    public LottoNumber converToLottoNumber(String initialBonusNumber) {
+        return new LottoNumber(initialBonusNumber);
+    }
 }
