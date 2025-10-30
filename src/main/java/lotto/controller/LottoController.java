@@ -31,8 +31,8 @@ public class LottoController {
 
         //보너스 번호 입력
         String initialBonusNumber = inputView.getBonusNumber();
-        lottoService.checkDuplicate(initialBonusNumber, winningLottoNumbers);
         LottoNumber bonusNumber = lottoParser.converToLottoNumber(initialBonusNumber);
+        lottoService.checkDuplicate(bonusNumber, winningLottoNumbers);
 
         // 번호 비교
 

@@ -37,8 +37,8 @@ public class LottoService {
         return purchasePrice / LOTTO_PRICE;
     }
 
-    public void checkDuplicate(String initialBonusNumber, List<LottoNumber> winningLottoNumbers) {
-        if (winningLottoNumbers.contains(new LottoNumber(initialBonusNumber))) {
+    public void checkDuplicate(LottoNumber bonusNumber, List<LottoNumber> winningLottoNumbers) {
+        if (winningLottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호와 중복된 번호입니다.");
         }
     }
