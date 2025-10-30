@@ -11,6 +11,8 @@ public class LottoService {
 
     private static LottoService instance;
 
+    private final LottoExtractor lottoExtractor = LottoExtractor.getInstance();
+
     private LottoService() {
     }
 
@@ -26,7 +28,7 @@ public class LottoService {
 
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoQuantity; i++) {
-            lottos.add(new Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6)));
+            lottos.add(new Lotto(lottoExtractor.getLotto()));
         }
         return lottos;
     }
