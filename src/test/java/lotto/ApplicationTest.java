@@ -1,9 +1,12 @@
 package lotto;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -46,10 +49,32 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    @Test
-    void 예외_테스트() {
+    @ParameterizedTest
+    @DisplayName("로또 구입 금액 예외 테스트")
+    @ValueSource(strings = {"1000j", "-2000", "0", "1550"})
+    void 예외_테스트_1(String price) {
         assertSimpleTest(() -> {
-            runException("1000j");
+            runException(price);
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @ParameterizedTest
+    @DisplayName("당첨 번호 예외 테스트")
+    @ValueSource(strings = {"1,2,3,4,5*6", "1,2,3,4,5", "0,1,2,3,4,5"})
+    void 예외_테스트_2(String numbers) {
+        assertSimpleTest(() -> {
+            runException("8000", numbers);
+            assertThat(output()).contains(ERROR_MESSAGE);
+        });
+    }
+
+    @ParameterizedTest
+    @DisplayName("보너스 번호 예외 테스트")
+    @ValueSource(strings = {"a", "-1", "6"})
+    void 예외_테스트_3(String bonusNumber) {
+        assertSimpleTest(() -> {
+            runException("8000", "1,2,3,4,5,6", bonusNumber);
             assertThat(output()).contains(ERROR_MESSAGE);
         });
     }
