@@ -38,7 +38,7 @@ public class InputView {
         try {
             return Integer.parseInt(inputPrice);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 구입금액은 숫자여야 합니다.");
+            throw new IllegalArgumentException("[ERROR] 구입금액은 정수 형태의 숫자여야 합니다.");
         }
     }
 
