@@ -4,7 +4,7 @@
 ---
 1. **[입력] 로또 구입 금액을 입력 받는다.**
     - [예외처리] 금액이 숫자 타입이 아닐 경우 IllegalArgumentException 예외를 발생시킨다.
-    - [예외처리] 금액이 양의 정수가 아닐 경우 IllegalArgumentException 예외를 발생시킨다.
+    - [예외처리] 금액이 1000원 미만일 경우 IllegalArgumentException 예외를 발생시킨다.
     - [예외처리] 1000원으로 나누어 떨어지지 않을 경우 IllegalArgumentException 예외를 발생시킨다.
 2. **[중간 과정] 구입 금액에 맞게 로또를 발행한다.**
 3. **[출력] 발행한 로또를 출력한다.**
