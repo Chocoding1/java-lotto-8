@@ -27,6 +27,7 @@ public class InputView {
     }
 
     public String getBonusNumber() {
+        printGetBonusNumberView();
         return getInputValue();
     }
 
@@ -36,6 +37,10 @@ public class InputView {
 
     private void printGetWinningNumbersView() {
         System.out.println("당첨 번호를 입력해 주세요.");
+    }
+
+    private void printGetBonusNumberView() {
+        System.out.println("보너스 번호를 입력해 주세요.");
     }
 
     private static String getInputValue() {
