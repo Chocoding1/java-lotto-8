@@ -21,6 +21,21 @@ public class Lotto {
         }
     }
 
+    public int compare(Lotto winningLotto) {
+        List<Integer> winningNumbers = winningLotto.getNumbers();
+        int matchCount = 0;
+        for (Integer winningNumber : winningNumbers) {
+            if (numbers.contains(winningNumber)) {
+                matchCount++;
+            }
+        }
+        return matchCount;
+    }
+
+    public boolean isContain(int number) {
+        return numbers.contains(number);
+    }
+
     private void validate(List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");

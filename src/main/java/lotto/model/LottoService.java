@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoService {
@@ -9,6 +10,7 @@ public class LottoService {
     private static LottoService instance;
 
     private final LottoExtractor lottoExtractor = LottoExtractor.getInstance();
+    private final LottoComparator lottoComparator = LottoComparator.getInstance();
 
     private LottoService() {
     }
@@ -28,6 +30,15 @@ public class LottoService {
 
     private int getLottoQuantity(int purchasePrice) {
         return purchasePrice / LOTTO_PRICE;
+    }
+
+    public List<CompareResult> compareLottoNumbers(List<Lotto> lottos, Lotto winningLotto, int bonusNumber) {
+        List<CompareResult> compareResults = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            compareResults.add(lottoComparator.compareLotto(lotto, winningLotto, bonusNumber));
+        }
+
+        return compareResults;
     }
 
 //    public List<WinningResult> getWinningResult(List<Lotto> lottos, List<LottoNumber> winningLottoNumbers,

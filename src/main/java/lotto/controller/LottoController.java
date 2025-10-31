@@ -1,8 +1,10 @@
 package lotto.controller;
 
 import java.util.List;
+import lotto.model.CompareResult;
 import lotto.model.Lotto;
 import lotto.model.LottoService;
+import lotto.model.PrizeCalculator;
 import lotto.model.converter.LottoConverter;
 import lotto.model.converter.LottoNumberConverter;
 import lotto.model.converter.PurchasePriceConverter;
@@ -19,13 +21,14 @@ public class LottoController {
     private LottoConverter lottoConverter = LottoConverter.getInstance();
     private PurchasePriceValidator purchasePriceValidator = PurchasePriceValidator.getInstance();
     private PurchasePriceConverter purchasePriceConverter = PurchasePriceConverter.getInstance();
+    private PrizeCalculator prizeCalculator = PrizeCalculator.getInstance();
 
     public void playLotto() {
         // 로또 구입 금액 입력
         int purchasePrice = getPurchasePrice();
 
         // 로또 발행 및 출력
-        publishAndPrintLotto(purchasePrice);
+        List<Lotto> lottos = publishAndPrintLotto(purchasePrice);
 
         // 당첨 번호 입력
         Lotto winningLotto = getWinningNumbers();
@@ -34,7 +37,10 @@ public class LottoController {
         int bonusNumber = getBonusNumber(winningLotto);
 
         // 번호 비교
-//        List<WinningResult> winningResult = lottoService.getWinningResult(lottos, winningLottoNumbers, bonusNumber);
+        List<CompareResult> compareResults = lottoService.compareLottoNumbers(lottos, winningLotto, bonusNumber);
+
+        // 수익률 계산
+        double rateOfReturn = prizeCalculator.calculate(purchasePrice, compareResults);
 
         //결과 출력
     }
@@ -49,10 +55,12 @@ public class LottoController {
         return purchasePrice;
     }
 
-    private void publishAndPrintLotto(int purchasePrice) {
+    private List<Lotto> publishAndPrintLotto(int purchasePrice) {
         List<Lotto> lottos = lottoService.publishLotto(purchasePrice);
 
         outputView.printPublishedResult(lottos);
+
+        return lottos;
     }
 
     private Lotto getWinningNumbers() {
