@@ -23,11 +23,8 @@ public class LottoController {
         // 로또 구입 금액 입력
         int purchasePrice = getPurchasePrice();
 
-        // 로또 발행
-        List<Lotto> lottos = lottoService.publishLotto(purchasePrice);
-
-        // 발행 결과 출력
-        outputView.printPublishedResult(lottos);
+        // 로또 발행 및 출력
+        publishAndPrintLotto(purchasePrice);
 
         // 당첨 번호 입력
         Lotto winningLotto = getWinningNumbers();
@@ -51,6 +48,12 @@ public class LottoController {
         purchasePriceValidator.validatePurchasePrice(purchasePrice);
 
         return purchasePrice;
+    }
+
+    private void publishAndPrintLotto(int purchasePrice) {
+        List<Lotto> lottos = lottoService.publishLotto(purchasePrice);
+
+        outputView.printPublishedResult(lottos);
     }
 
     private Lotto getWinningNumbers() {
