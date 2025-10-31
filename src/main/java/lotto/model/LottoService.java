@@ -22,13 +22,9 @@ public class LottoService {
     }
 
     public List<Lotto> publishLotto(int purchasePrice) {
-        int lottoQuantity = getLottoQuantity(purchasePrice);
+        int lottoQuantity = getLottoQuantity(purchasePrice); // 로또 발행 개수는 service에서 하고, 로또 추출기는 입력받은 횟수만큼 로또 추출만 하도록
 
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < lottoQuantity; i++) {
-            lottos.add(new Lotto(lottoExtractor.getLotto()));
-        }
-        return lottos;
+        return lottoExtractor.getLotto(lottoQuantity);
     }
 
     private int getLottoQuantity(int purchasePrice) {
@@ -41,29 +37,29 @@ public class LottoService {
         }
     }
 
-    public List<WinningResult> getWinningResult(List<Lotto> lottos, List<LottoNumber> winningLottoNumbers,
-                                                LottoNumber bonusNumber) {
-        List<WinningResult> winningResults = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            winningResults.add(getMatchCount(lotto, winningLottoNumbers, bonusNumber));
-        }
-        return winningResults;
-    }
+//    public List<WinningResult> getWinningResult(List<Lotto> lottos, List<LottoNumber> winningLottoNumbers,
+//                                                LottoNumber bonusNumber) {
+//        List<WinningResult> winningResults = new ArrayList<>();
+//        for (Lotto lotto : lottos) {
+//            winningResults.add(getMatchCount(lotto, winningLottoNumbers, bonusNumber));
+//        }
+//        return winningResults;
+//    }
 
-    private WinningResult getMatchCount(Lotto lotto, List<LottoNumber> winningLottoNumbers, LottoNumber bonusNumber) {
-        List<Integer> numbers = lotto.getNumbers();
-        int matchCount = 0;
-        for (Integer number : numbers) {
-            if (winningLottoNumbers.contains(number)) {
-                matchCount++;
-            }
-        }
-        boolean matchBonus = false;
-        if (numbers.contains(bonusNumber)) {
-            matchCount++;
-            matchBonus = true;
-        }
-
-        return new WinningResult(matchCount, matchBonus);
-    }
+//    private WinningResult getMatchCount(Lotto lotto, List<LottoNumber> winningLottoNumbers, LottoNumber bonusNumber) {
+//        List<Integer> numbers = lotto.getNumbers();
+//        int matchCount = 0;
+//        for (Integer number : numbers) {
+//            if (winningLottoNumbers.contains(number)) {
+//                matchCount++;
+//            }
+//        }
+//        boolean matchBonus = false;
+//        if (numbers.contains(bonusNumber)) {
+//            matchCount++;
+//            matchBonus = true;
+//        }
+//
+//        return new WinningResult(matchCount, matchBonus);
+//    }
 }
