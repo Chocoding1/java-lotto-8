@@ -1,6 +1,5 @@
 package lotto.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LottoService {
@@ -29,12 +28,6 @@ public class LottoService {
 
     private int getLottoQuantity(int purchasePrice) {
         return purchasePrice / LOTTO_PRICE;
-    }
-
-    public void checkDuplicate(LottoNumber bonusNumber, List<LottoNumber> winningLottoNumbers) {
-        if (winningLottoNumbers.contains(bonusNumber)) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호와 중복된 번호입니다.");
-        }
     }
 
 //    public List<WinningResult> getWinningResult(List<Lotto> lottos, List<LottoNumber> winningLottoNumbers,
