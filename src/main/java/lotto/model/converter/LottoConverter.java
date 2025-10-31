@@ -2,7 +2,6 @@ package lotto.model.converter;
 
 import java.util.Arrays;
 import lotto.model.Lotto;
-import lotto.model.LottoNumber;
 import lotto.model.validator.LottoNumberValidator;
 
 public class LottoConverter {
@@ -25,9 +24,5 @@ public class LottoConverter {
                 .peek(LottoNumberValidator::validateNumber)
                 .toList());
 
-    }
-
-    public LottoNumber converToLottoNumber(String initialBonusNumber) {
-        return new LottoNumber(initialBonusNumber);
     }
 }

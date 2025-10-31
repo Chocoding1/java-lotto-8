@@ -5,7 +5,9 @@ import lotto.model.Lotto;
 import lotto.model.LottoNumber;
 import lotto.model.LottoService;
 import lotto.model.converter.LottoConverter;
+import lotto.model.converter.LottoNumberConverter;
 import lotto.model.converter.PurchasePriceConverter;
+import lotto.model.validator.LottoNumberValidator;
 import lotto.model.validator.PurchasePriceValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -30,9 +32,7 @@ public class LottoController {
         Lotto winningLotto = getWinningNumbers();
 
         //보너스 번호 입력
-        String initialBonusNumber = inputView.getBonusNumber();
-        LottoNumber bonusNumber = lottoConverter.converToLottoNumber(initialBonusNumber);
-        lottoService.checkDuplicate(bonusNumber, winningLottoNumbers);
+        int bonusNumber = getBonusNumber();
 
         // 번호 비교
 //        List<WinningResult> winningResult = lottoService.getWinningResult(lottos, winningLottoNumbers, bonusNumber);
@@ -59,5 +59,15 @@ public class LottoController {
     private Lotto getWinningNumbers() {
         String initialWinningNumbers = inputView.getWinningNumbers();
         return lottoConverter.convertToLotto(initialWinningNumbers);
+    }
+
+    private int getBonusNumber() {
+        String initialBonusNumber = inputView.getBonusNumber();
+
+        int bonusNumber = LottoNumberConverter.convertToInt(initialBonusNumber);
+
+        LottoNumberValidator.validateNumber(bonusNumber);
+
+        return bonusNumber;
     }
 }
