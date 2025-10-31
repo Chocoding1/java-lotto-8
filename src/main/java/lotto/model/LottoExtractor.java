@@ -27,8 +27,12 @@ public class LottoExtractor {
     public List<Lotto> getLotto(int quantity) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
-            lottos.add(new Lotto(Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT)));
+            lottos.add(getLotto());
         }
         return lottos;
+    }
+
+    private static Lotto getLotto() {
+        return new Lotto(Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT));
     }
 }
