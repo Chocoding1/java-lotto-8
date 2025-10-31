@@ -16,9 +16,9 @@ public class InputView {
         return instance;
     }
 
-    public int getPurchasePrice() {
+    public String getPurchasePrice() {
         printGetPurchasePriceView();
-        return convertToInt(getInputValue());
+        return getInputValue();
     }
 
     public String getWinningNumbers() {
@@ -35,13 +35,5 @@ public class InputView {
 
     private static String getInputValue() {
         return Console.readLine();
-    }
-
-    private int convertToInt(String inputPrice) {
-        try {
-            return Integer.parseInt(inputPrice);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 구입금액은 정수 형태의 숫자여야 합니다.");
-        }
     }
 }

@@ -6,6 +6,7 @@ import lotto.model.LottoNumber;
 import lotto.model.LottoService;
 import lotto.model.LottoParser;
 import lotto.model.WinningResult;
+import lotto.model.converter.PurchasePriceConverter;
 import lotto.model.validator.PurchasePriceValidator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -17,12 +18,12 @@ public class LottoController {
     private LottoService lottoService = LottoService.getInstance();
     private LottoParser lottoParser = LottoParser.getInstance();
     private PurchasePriceValidator purchasePriceValidator = PurchasePriceValidator.getInstance();
+    private PurchasePriceConverter purchasePriceConverter = PurchasePriceConverter.getInstance();
 
     public void playLotto() {
         // 로또 구입 금액 입력
         int purchasePrice = getPurchasePrice();
 
-        // 로또 발행 횟수 계산
         // 로또 발행
         List<Lotto> lottos = lottoService.publishLotto(purchasePrice);
 
@@ -45,8 +46,12 @@ public class LottoController {
     }
 
     private int getPurchasePrice() {
-        int purchasePrice = inputView.getPurchasePrice();
+        String initialPrice = inputView.getPurchasePrice();
+
+        int purchasePrice = purchasePriceConverter.convertToInt(initialPrice);
+
         purchasePriceValidator.validatePurchasePrice(purchasePrice);
+
         return purchasePrice;
     }
 }
