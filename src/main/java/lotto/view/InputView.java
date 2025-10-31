@@ -18,12 +18,7 @@ public class InputView {
 
     public int getPurchasePrice() {
         printGetPurchasePriceView();
-        String initialPurchasePrice = getInputValue();
-
-        int purchasePrice = convertToInt(initialPurchasePrice);
-        validatePurchasePrice(purchasePrice);
-
-        return purchasePrice;
+        return convertToInt(getInputValue());
     }
 
     public String getWinningNumbers() {
@@ -47,16 +42,6 @@ public class InputView {
             return Integer.parseInt(inputPrice);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("[ERROR] 구입금액은 정수 형태의 숫자여야 합니다.");
-        }
-    }
-
-    private void validatePurchasePrice(int purchasePrice) {
-        if (purchasePrice < 1000) {
-            throw new IllegalArgumentException("[ERROR] 구입금액은 1000원 이상이어야 합니다.");
-        }
-
-        if (purchasePrice % 1000 != 0) {
-            throw new IllegalArgumentException("[ERROR] 구입금액은 1000원 단위로 입력해주세요.");
         }
     }
 }

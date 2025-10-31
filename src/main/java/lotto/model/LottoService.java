@@ -1,9 +1,7 @@
 package lotto.model;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
-import lotto.Lotto;
 
 public class LottoService {
 
@@ -41,5 +39,31 @@ public class LottoService {
         if (winningLottoNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호와 중복된 번호입니다.");
         }
+    }
+
+    public List<WinningResult> getWinningResult(List<Lotto> lottos, List<LottoNumber> winningLottoNumbers,
+                                                LottoNumber bonusNumber) {
+        List<WinningResult> winningResults = new ArrayList<>();
+        for (Lotto lotto : lottos) {
+            winningResults.add(getMatchCount(lotto, winningLottoNumbers, bonusNumber));
+        }
+        return winningResults;
+    }
+
+    private WinningResult getMatchCount(Lotto lotto, List<LottoNumber> winningLottoNumbers, LottoNumber bonusNumber) {
+        List<Integer> numbers = lotto.getNumbers();
+        int matchCount = 0;
+        for (Integer number : numbers) {
+            if (winningLottoNumbers.contains(number)) {
+                matchCount++;
+            }
+        }
+        boolean matchBonus = false;
+        if (numbers.contains(bonusNumber)) {
+            matchCount++;
+            matchBonus = true;
+        }
+
+        return new WinningResult(matchCount, matchBonus);
     }
 }
