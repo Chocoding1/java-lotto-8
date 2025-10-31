@@ -2,7 +2,6 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.model.Lotto;
-import lotto.model.LottoNumber;
 import lotto.model.LottoService;
 import lotto.model.converter.LottoConverter;
 import lotto.model.converter.LottoNumberConverter;
@@ -32,7 +31,7 @@ public class LottoController {
         Lotto winningLotto = getWinningNumbers();
 
         //보너스 번호 입력
-        int bonusNumber = getBonusNumber();
+        int bonusNumber = getBonusNumber(winningLotto);
 
         // 번호 비교
 //        List<WinningResult> winningResult = lottoService.getWinningResult(lottos, winningLottoNumbers, bonusNumber);
@@ -61,12 +60,14 @@ public class LottoController {
         return lottoConverter.convertToLotto(initialWinningNumbers);
     }
 
-    private int getBonusNumber() {
+    private int getBonusNumber(Lotto winningLotto) {
         String initialBonusNumber = inputView.getBonusNumber();
 
         int bonusNumber = LottoNumberConverter.convertToInt(initialBonusNumber);
 
         LottoNumberValidator.validateNumber(bonusNumber);
+
+        winningLotto.validateDuplicateNumber(bonusNumber);
 
         return bonusNumber;
     }
