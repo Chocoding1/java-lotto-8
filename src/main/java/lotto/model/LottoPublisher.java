@@ -24,7 +24,9 @@ public class LottoPublisher {
     }
 
     // 정적 메소드 알아봐
-    public PublishedLotto getLotto(int quantity) {
+    public PublishedLotto publishLotto(PurchasePrice purchasePrice) {
+        int quantity = purchasePrice.getLottoQuantity();
+
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
             lottos.add(getLotto());
