@@ -3,6 +3,7 @@ package lotto.model.converter;
 import java.util.Arrays;
 import lotto.model.Lotto;
 import lotto.model.validator.LottoNumberValidator;
+import lotto.util.InputUtil;
 
 public class LottoConverter {
 
@@ -20,7 +21,7 @@ public class LottoConverter {
 
     public Lotto convertToLotto(String inputValue) {
         return new Lotto(Arrays.stream(inputValue.split(","))
-                .map(LottoNumberConverter::convertToInt)
+                .map(InputUtil::convertToInt)
                 .peek(LottoNumberValidator::validateNumber)
                 .toList());
 
