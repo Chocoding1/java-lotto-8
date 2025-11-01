@@ -1,7 +1,5 @@
 package lotto.model;
 
-import lotto.model.converter.LottoConverter;
-
 public class LottoComparator {
 
     private static LottoComparator instance;
@@ -16,10 +14,11 @@ public class LottoComparator {
         return instance;
     }
 
-    public CompareResult compareLotto(Lotto lotto, Lotto winningLotto, int bonusNumber) {
-        int matchCount = lotto.compare(winningLotto);
+    public CompareResult compareLotto(Lotto lotto, WinningLotto winningLotto) {
+        int matchCount = lotto.getMatchCount(winningLotto.getLotto());
         boolean bonusMatch = false;
-        if (lotto.isContain(bonusNumber)) {
+
+        if (lotto.isContain(winningLotto.getBonusNumber())) {
             matchCount++;
             bonusMatch = true;
         }
