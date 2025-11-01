@@ -22,7 +22,7 @@ public class Lotto {
         }
     }
 
-    public int compare(Lotto winningLotto) {
+    public int getMatchCount(Lotto winningLotto) {
         List<Integer> winningNumbers = winningLotto.getNumbers();
 
         return (int) winningNumbers.stream()
