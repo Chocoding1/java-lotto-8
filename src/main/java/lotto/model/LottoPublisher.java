@@ -7,29 +7,29 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoExtractor {
+public class LottoPublisher {
 
     private static final int NUMBER_COUNT = 6;
 
-    private static LottoExtractor instance;
+    private static LottoPublisher instance;
 
-    private LottoExtractor() {
+    private LottoPublisher() {
     }
 
-    public static LottoExtractor getInstance() {
+    public static LottoPublisher getInstance() {
         if (instance == null) {
-            instance = new LottoExtractor();
+            instance = new LottoPublisher();
         }
         return instance;
     }
 
     // 정적 메소드 알아봐
-    public List<Lotto> getLotto(int quantity) {
+    public PublishedLotto getLotto(int quantity) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
             lottos.add(getLotto());
         }
-        return lottos;
+        return new PublishedLotto(lottos);
     }
 
     private static Lotto getLotto() {
