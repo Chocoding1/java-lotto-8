@@ -24,13 +24,10 @@ public class Lotto {
 
     public int compare(Lotto winningLotto) {
         List<Integer> winningNumbers = winningLotto.getNumbers();
-        int matchCount = 0;
-        for (Integer winningNumber : winningNumbers) {
-            if (numbers.contains(winningNumber)) {
-                matchCount++;
-            }
-        }
-        return matchCount;
+
+        return (int) winningNumbers.stream()
+                .filter(numbers::contains)
+                .count();
     }
 
     public boolean isContain(int number) {
