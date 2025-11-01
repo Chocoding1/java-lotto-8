@@ -1,9 +1,8 @@
 package lotto.view;
 
-import java.util.List;
-import lotto.model.CompareResult;
 import lotto.model.Lotto;
 import lotto.model.ResultForView;
+import lotto.model.dto.PublishedLottoDto;
 
 public class OutputView {
 
@@ -19,9 +18,9 @@ public class OutputView {
         return instance;
     }
 
-    public void printPublishedResult(List<Lotto> lottos) {
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-        for (Lotto lotto : lottos) {
+    public void printPublishedResult(PublishedLottoDto publishedLottoDto) {
+        System.out.println(publishedLottoDto.getLottoCount() + "개를 구매했습니다.");
+        for (Lotto lotto : publishedLottoDto.getLottos()) {
             System.out.println(lotto);
         }
 
