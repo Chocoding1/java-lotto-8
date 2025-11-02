@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import lotto.hadler.ExceptionHandler;
 import lotto.model.domain.CompareResult;
 import lotto.model.domain.Lotto;
 import lotto.model.dto.ResultForView;
@@ -25,16 +26,18 @@ public class LottoController {
     private final LottoComparator lottoComparator;
     private final LottoConverter lottoConverter;
     private final PrizeCalculator prizeCalculator;
+    private final ExceptionHandler exceptionHandler;
 
     public LottoController(InputView inputView, OutputView outputView, LottoPublisher lottoPublisher,
                            LottoComparator lottoComparator, LottoConverter lottoConverter,
-                           PrizeCalculator prizeCalculator) {
+                           PrizeCalculator prizeCalculator, ExceptionHandler exceptionHandler) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.lottoPublisher = lottoPublisher;
         this.lottoComparator = lottoComparator;
         this.lottoConverter = lottoConverter;
         this.prizeCalculator = prizeCalculator;
+        this.exceptionHandler = exceptionHandler;
     }
 
     public void playLotto() {

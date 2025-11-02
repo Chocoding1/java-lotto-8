@@ -1,6 +1,8 @@
 package lotto.config;
 
 import lotto.controller.LottoController;
+import lotto.hadler.ExceptionHandler;
+import lotto.hadler.ExceptionHandlerImpl;
 import lotto.model.converter.LottoConverter;
 import lotto.model.service.LottoComparator;
 import lotto.model.service.LottoPublisher;
@@ -17,11 +19,12 @@ public class AppConfig {
     private LottoComparator lottoComparator;
     private LottoConverter lottoConverter;
     private PrizeCalculator prizeCalculator;
+    private ExceptionHandler exceptionHandler;
 
     public LottoController lottoController() {
         if (lottoController == null) {
             lottoController = new LottoController(inputView(), outputView(), lottoPublisher(), lottoComparator(),
-                    lottoConverter(), prizeCalculator());
+                    lottoConverter(), prizeCalculator(), exceptionHandler());
         }
         return lottoController;
     }
@@ -66,5 +69,12 @@ public class AppConfig {
             prizeCalculator = new PrizeCalculator();
         }
         return prizeCalculator;
+    }
+
+    public ExceptionHandler exceptionHandler() {
+        if (exceptionHandler == null) {
+            exceptionHandler = new ExceptionHandlerImpl();
+        }
+        return exceptionHandler;
     }
 }
