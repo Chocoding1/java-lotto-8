@@ -1,7 +1,7 @@
 package lotto.view;
 
-import lotto.model.Lotto;
-import lotto.model.ResultForView;
+import lotto.model.domain.Lotto;
+import lotto.model.dto.ResultForView;
 import lotto.model.dto.PublishedLottoDto;
 
 public class OutputView {

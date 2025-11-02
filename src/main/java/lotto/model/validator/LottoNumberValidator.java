@@ -1,7 +1,7 @@
 package lotto.model.validator;
 
-import static lotto.model.LottoConstant.MAX_NUMBER;
-import static lotto.model.LottoConstant.MIN_NUMBER;
+import static lotto.model.constant.LottoConstant.MAX_NUMBER;
+import static lotto.model.constant.LottoConstant.MIN_NUMBER;
 
 public class LottoNumberValidator {
 

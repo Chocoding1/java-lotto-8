@@ -1,7 +1,7 @@
 package lotto.model.converter;
 
 import java.util.Arrays;
-import lotto.model.Lotto;
+import lotto.model.domain.Lotto;
 import lotto.model.validator.LottoNumberValidator;
 import lotto.util.InputUtil;
 
