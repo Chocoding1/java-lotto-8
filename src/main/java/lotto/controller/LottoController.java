@@ -20,19 +20,15 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    private final InputView inputView;
-    private final OutputView outputView;
     private final LottoPublisher lottoPublisher;
     private final LottoComparator lottoComparator;
     private final LottoConverter lottoConverter;
     private final PrizeCalculator prizeCalculator;
     private final ExceptionHandler exceptionHandler;
 
-    public LottoController(InputView inputView, OutputView outputView, LottoPublisher lottoPublisher,
+    public LottoController(LottoPublisher lottoPublisher,
                            LottoComparator lottoComparator, LottoConverter lottoConverter,
                            PrizeCalculator prizeCalculator, ExceptionHandler exceptionHandler) {
-        this.inputView = inputView;
-        this.outputView = outputView;
         this.lottoPublisher = lottoPublisher;
         this.lottoComparator = lottoComparator;
         this.lottoConverter = lottoConverter;
@@ -59,12 +55,12 @@ public class LottoController {
         //결과 출력
         ResultForView resultForView = new ResultForView();
         resultForView.getResultForView(compareResults);
-        outputView.printWinningResult(resultForView, profitRate);
+        OutputView.printWinningResult(resultForView, profitRate);
 
     }
 
     private PurchasePrice getPurchasePrice() {
-        String initialPrice = inputView.getPurchasePrice();
+        String initialPrice = InputView.getPurchasePrice();
 
         int convertedPrice = InputUtil.convertToInt(initialPrice);
 
@@ -76,7 +72,7 @@ public class LottoController {
 
         PublishedLottoDto publishedLottoDto = convertToPublishedLottoDto(publishedLotto);
 
-        outputView.printPublishedResult(publishedLottoDto);
+        OutputView.printPublishedResult(publishedLottoDto);
 
         return publishedLotto;
     }
@@ -96,7 +92,7 @@ public class LottoController {
     }
 
     private Lotto getWinningNumbers() {
-        String initialWinningNumbers = inputView.getWinningNumbers();
+        String initialWinningNumbers = InputView.getWinningNumbers();
 
         return lottoConverter.convertToLotto(initialWinningNumbers);
     }
@@ -108,7 +104,7 @@ public class LottoController {
     }
 
     private int getBonusNumber() {
-        String initialBonusNumber = inputView.getBonusNumber();
+        String initialBonusNumber = InputView.getBonusNumber();
         int bonusNumber = InputUtil.convertToInt(initialBonusNumber);
 
         LottoNumberValidator.validateNumber(bonusNumber);
