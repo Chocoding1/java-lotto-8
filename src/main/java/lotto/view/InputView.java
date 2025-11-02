@@ -2,33 +2,40 @@ package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
 
-public class InputView {
+public final class InputView {
 
-    public String getPurchasePrice() {
+    private static final String PURCHASE_PRICE_MESSAGE = "구입금액을 입력해 주세요.";
+    private static final String WINNING_NUMBERS_MESSAGE = "당첨 번호를 입력해 주세요.";
+    private static final String BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
+
+    private InputView() {
+    }
+
+    public static String getPurchasePrice() {
         printGetPurchasePriceView();
         return getInputValue();
     }
 
-    public String getWinningNumbers() {
+    public static String getWinningNumbers() {
         printGetWinningNumbersView();
         return getInputValue();
     }
 
-    public String getBonusNumber() {
+    public static String getBonusNumber() {
         printGetBonusNumberView();
         return getInputValue();
     }
 
     private static void printGetPurchasePriceView() {
-        System.out.println("구입금액을 입력해 주세요.");
+        System.out.println(PURCHASE_PRICE_MESSAGE);
     }
 
-    private void printGetWinningNumbersView() {
-        System.out.println("당첨 번호를 입력해 주세요.");
+    private static void printGetWinningNumbersView() {
+        System.out.println(WINNING_NUMBERS_MESSAGE);
     }
 
-    private void printGetBonusNumberView() {
-        System.out.println("보너스 번호를 입력해 주세요.");
+    private static void printGetBonusNumberView() {
+        System.out.println(BONUS_NUMBER_MESSAGE);
     }
 
     private static String getInputValue() {
