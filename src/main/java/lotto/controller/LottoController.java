@@ -1,9 +1,8 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.hadler.TestExceptionHandlerImpl;
 import lotto.model.domain.CompareResult;
-import lotto.model.domain.Lotto;
+import lotto.Lotto;
 import lotto.model.dto.ResultForView;
 import lotto.model.service.LottoComparator;
 import lotto.model.service.LottoPublisher;
@@ -13,7 +12,6 @@ import lotto.model.domain.PurchasePrice;
 import lotto.model.domain.WinningLotto;
 import lotto.model.converter.LottoConverter;
 import lotto.model.dto.PublishedLottoDto;
-import lotto.hadler.ExceptionHandlerImpl;
 import lotto.util.InputUtil;
 import lotto.model.validator.LottoNumberValidator;
 import lotto.view.InputView;

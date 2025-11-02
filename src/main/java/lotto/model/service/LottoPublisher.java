@@ -6,7 +6,7 @@ import static lotto.model.constant.LottoConstant.MIN_NUMBER;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
-import lotto.model.domain.Lotto;
+import lotto.Lotto;
 import lotto.model.domain.PublishedLotto;
 import lotto.model.domain.PurchasePrice;
 

@@ -1,7 +1,7 @@
 package lotto.model.dto;
 
 import java.util.List;
-import lotto.model.domain.Lotto;
+import lotto.Lotto;
 
 public class PublishedLottoDto {
 
