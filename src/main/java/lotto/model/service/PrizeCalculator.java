@@ -1,8 +1,9 @@
-package lotto.model;
+package lotto.model.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lotto.model.domain.CompareResult;
+import lotto.model.domain.PurchasePrice;
 
 public class PrizeCalculator {
 

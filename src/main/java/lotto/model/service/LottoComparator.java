@@ -1,4 +1,8 @@
-package lotto.model;
+package lotto.model.service;
+
+import lotto.model.domain.CompareResult;
+import lotto.model.domain.Lotto;
+import lotto.model.domain.WinningLotto;
 
 public class LottoComparator {
 

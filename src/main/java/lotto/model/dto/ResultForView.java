@@ -1,6 +1,7 @@
-package lotto.model;
+package lotto.model.dto;
 
 import java.util.List;
+import lotto.model.domain.CompareResult;
 
 public class ResultForView {
 
