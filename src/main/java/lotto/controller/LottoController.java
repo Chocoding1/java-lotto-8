@@ -53,9 +53,7 @@ public class LottoController {
         double profitRate = prizeCalculator.getProfitRate(purchasePrice, compareResults);
 
         //결과 출력
-        ResultForView resultForView = new ResultForView();
-        resultForView.getResultForView(compareResults);
-        OutputView.printWinningResult(resultForView, profitRate);
+        printLottoResult(compareResults, profitRate);
 
     }
 
@@ -110,5 +108,11 @@ public class LottoController {
         LottoNumberValidator.validateNumber(bonusNumber);
 
         return bonusNumber;
+    }
+
+    private static void printLottoResult(List<CompareResult> compareResults, double profitRate) {
+        ResultForView resultForView = new ResultForView();
+        resultForView.getResultForView(compareResults);
+        OutputView.printWinningResult(resultForView, profitRate);
     }
 }
