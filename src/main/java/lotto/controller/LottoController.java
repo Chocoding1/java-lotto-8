@@ -41,29 +41,25 @@ public class LottoController {
     }
 
     public void playLotto() {
-        try {
-            // 로또 구입 금액 입력
-            PurchasePrice purchasePrice = getPurchasePrice();
+        // 로또 구입 금액 입력
+        PurchasePrice purchasePrice = exceptionHandler.trySupplierUntilSuccess(this::getPurchasePrice);
 
-            // 로또 발행 및 출력
-            PublishedLotto publishedLotto = publishAndPrintLotto(purchasePrice);
+        // 로또 발행 및 출력
+        PublishedLotto publishedLotto = publishAndPrintLotto(purchasePrice);
 
-            // 당첨 로또 입력
-            WinningLotto winningLotto = getWinningLotto();
+        // 당첨 로또 입력
+        WinningLotto winningLotto = getWinningLotto();
 
-            // 번호 비교
-            List<CompareResult> compareResults = lottoComparator.getCompareResults(publishedLotto, winningLotto);
+        // 번호 비교
+        List<CompareResult> compareResults = lottoComparator.getCompareResults(publishedLotto, winningLotto);
 
-            // 수익률 계산
-            double profitRate = prizeCalculator.getProfitRate(purchasePrice, compareResults);
+        // 수익률 계산
+        double profitRate = prizeCalculator.getProfitRate(purchasePrice, compareResults);
 
-            //결과 출력
-            ResultForView resultForView = new ResultForView();
-            resultForView.getResultForView(compareResults);
-            outputView.printWinningResult(resultForView, profitRate);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        //결과 출력
+        ResultForView resultForView = new ResultForView();
+        resultForView.getResultForView(compareResults);
+        outputView.printWinningResult(resultForView, profitRate);
 
     }
 
@@ -90,11 +86,11 @@ public class LottoController {
     }
 
     private WinningLotto getWinningLotto() {
-        Lotto winningLottoNumbers = getWinningNumbers();
+        Lotto winningLottoNumbers = exceptionHandler.trySupplierUntilSuccess(this::getWinningNumbers);
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
 
-        addBonusNumber(winningLotto);
+        exceptionHandler.tryRunnableUntilSuccess(() -> addBonusNumber(winningLotto));
 
         return winningLotto;
     }
