@@ -9,7 +9,7 @@ public class TestExceptionHandlerImpl implements ExceptionHandler{
         while (true) {
             try {
                 return supplier.get();
-            } catch (Exception e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 throw e;
             }
@@ -22,7 +22,7 @@ public class TestExceptionHandlerImpl implements ExceptionHandler{
             try {
                 runnable.run();
                 break;
-            } catch (Exception e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
                 throw e;
             }
