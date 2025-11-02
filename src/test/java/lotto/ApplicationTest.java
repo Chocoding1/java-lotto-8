@@ -51,7 +51,7 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("로또 구입 금액 예외 테스트")
-    @ValueSource(strings = {"1000j", "-2000", "0", "1550"})
+    @ValueSource(strings = {"1000j", "-2000", "0", "1550", " ", "\t"})
     void 예외_테스트_1(String price) {
         assertSimpleTest(() -> {
             runException(price);
@@ -61,7 +61,7 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("당첨 번호 예외 테스트")
-    @ValueSource(strings = {"1,2,3,4,5*6", "1,2,3,4,5", "0,1,2,3,4,5"})
+    @ValueSource(strings = {"1,2,3,4,5*6", "1,2,3,4,5", "0,1,2,3,4,5", "1,2,3,4,5,5", " ", "\t"})
     void 예외_테스트_2(String numbers) {
         assertSimpleTest(() -> {
             runException("8000", numbers);
@@ -71,7 +71,7 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("보너스 번호 예외 테스트")
-    @ValueSource(strings = {"a", "-1", "6"})
+    @ValueSource(strings = {"a", "-1", "6", " ", "\t"})
     void 예외_테스트_3(String bonusNumber) {
         assertSimpleTest(() -> {
             runException("8000", "1,2,3,4,5,6", bonusNumber);
