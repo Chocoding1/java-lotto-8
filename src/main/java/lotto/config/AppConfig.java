@@ -2,7 +2,6 @@ package lotto.config;
 
 import lotto.controller.LottoController;
 import lotto.hadler.ExceptionHandler;
-import lotto.hadler.ExceptionHandlerImpl;
 import lotto.model.converter.LottoConverter;
 import lotto.model.service.LottoComparator;
 import lotto.model.service.LottoPublisher;
@@ -73,7 +72,7 @@ public class AppConfig {
 
     public ExceptionHandler exceptionHandler() {
         if (exceptionHandler == null) {
-            exceptionHandler = new ExceptionHandlerImpl();
+            exceptionHandler = new ExceptionHandler();
         }
         return exceptionHandler;
     }
