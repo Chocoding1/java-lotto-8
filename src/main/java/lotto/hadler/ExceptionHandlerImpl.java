@@ -4,18 +4,6 @@ import java.util.function.Supplier;
 
 public class ExceptionHandlerImpl implements ExceptionHandler {
 
-    private static ExceptionHandlerImpl instance;
-
-    private ExceptionHandlerImpl() {
-    }
-
-    public static ExceptionHandlerImpl getInstance() {
-        if (instance == null) {
-            instance = new ExceptionHandlerImpl();
-        }
-        return instance;
-    }
-
     @Override
     public <T> T trySupplierUntilSuccess(Supplier<T> supplier) {
         while (true) {
