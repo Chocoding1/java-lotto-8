@@ -14,18 +14,6 @@ public class LottoPublisher {
 
     private static final int NUMBER_COUNT = 6;
 
-    private static LottoPublisher instance;
-
-    private LottoPublisher() {
-    }
-
-    public static LottoPublisher getInstance() {
-        if (instance == null) {
-            instance = new LottoPublisher();
-        }
-        return instance;
-    }
-
     // 정적 메소드 알아봐
     public PublishedLotto publishLotto(PurchasePrice purchasePrice) {
         int quantity = purchasePrice.getLottoQuantity();

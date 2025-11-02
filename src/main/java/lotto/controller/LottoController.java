@@ -19,12 +19,23 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
-    private InputView inputView = InputView.getInstance();
-    private OutputView outputView = OutputView.getInstance();
-    private LottoPublisher lottoPublisher = LottoPublisher.getInstance();
-    private LottoComparator lottoComparator = LottoComparator.getInstance();
-    private LottoConverter lottoConverter = LottoConverter.getInstance();
-    private PrizeCalculator prizeCalculator = PrizeCalculator.getInstance();
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final LottoPublisher lottoPublisher;
+    private final LottoComparator lottoComparator;
+    private final LottoConverter lottoConverter;
+    private final PrizeCalculator prizeCalculator;
+
+    public LottoController(InputView inputView, OutputView outputView, LottoPublisher lottoPublisher,
+                           LottoComparator lottoComparator, LottoConverter lottoConverter,
+                           PrizeCalculator prizeCalculator) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.lottoPublisher = lottoPublisher;
+        this.lottoComparator = lottoComparator;
+        this.lottoConverter = lottoConverter;
+        this.prizeCalculator = prizeCalculator;
+    }
 
     public void playLotto() {
         try {

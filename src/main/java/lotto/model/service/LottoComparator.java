@@ -8,18 +8,6 @@ import lotto.model.domain.WinningLotto;
 
 public class LottoComparator {
 
-    private static LottoComparator instance;
-
-    private LottoComparator() {
-    }
-
-    public static LottoComparator getInstance() {
-        if (instance == null) {
-            instance = new LottoComparator();
-        }
-        return instance;
-    }
-
     public List<CompareResult> getCompareResults(PublishedLotto publishedLotto, WinningLotto winningLotto) {
         return publishedLotto.getLottos().stream()
                 .map(lotto -> getCompareResult(lotto, winningLotto))

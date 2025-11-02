@@ -7,18 +7,6 @@ import lotto.model.dto.PublishedLottoDto;
 
 public class OutputView {
 
-    private static OutputView instance;
-
-    private OutputView() {
-    }
-
-    public static OutputView getInstance() {
-        if (instance == null) {
-            instance = new OutputView();
-        }
-        return instance;
-    }
-
     public void printPublishedResult(PublishedLottoDto publishedLottoDto) {
         System.out.println(publishedLottoDto.getLottoCount() + "개를 구매했습니다.");
         for (Lotto lotto : publishedLottoDto.getLottos()) {

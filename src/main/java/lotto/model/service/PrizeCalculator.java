@@ -19,22 +19,6 @@ public class PrizeCalculator {
             6, 2000000000
     );
 
-    private static PrizeCalculator instance;
-
-    private PrizeCalculator() {
-        initPrizeTable();
-    }
-
-    private void initPrizeTable() {
-    }
-
-    public static PrizeCalculator getInstance() {
-        if (instance == null) {
-            instance = new PrizeCalculator();
-        }
-        return instance;
-    }
-
     public double getProfitRate(PurchasePrice purchasePrice, List<CompareResult> compareResults) {
         int totalPrize = getTotalPrize(compareResults);
         return Math.round(calculateProfitRate(totalPrize, purchasePrice) * 10) / 10.0;

@@ -7,18 +7,6 @@ import lotto.util.InputUtil;
 
 public class LottoConverter {
 
-    private static LottoConverter instance;
-
-    private LottoConverter() {
-    }
-
-    public static LottoConverter getInstance() {
-        if (instance == null) {
-            instance = new LottoConverter();
-        }
-        return instance;
-    }
-
     public Lotto convertToLotto(String inputValue) {
         return new Lotto(Arrays.stream(inputValue.split(","))
                 .map(InputUtil::convertToInt)
