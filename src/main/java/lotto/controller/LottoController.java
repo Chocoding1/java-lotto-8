@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
+import lotto.hadler.TestExceptionHandlerImpl;
 import lotto.model.domain.CompareResult;
 import lotto.model.domain.Lotto;
 import lotto.model.dto.ResultForView;
@@ -12,6 +13,7 @@ import lotto.model.domain.PurchasePrice;
 import lotto.model.domain.WinningLotto;
 import lotto.model.converter.LottoConverter;
 import lotto.model.dto.PublishedLottoDto;
+import lotto.hadler.ExceptionHandlerImpl;
 import lotto.util.InputUtil;
 import lotto.model.validator.LottoNumberValidator;
 import lotto.view.InputView;
@@ -27,25 +29,30 @@ public class LottoController {
     private PrizeCalculator prizeCalculator = PrizeCalculator.getInstance();
 
     public void playLotto() {
-        // 로또 구입 금액 입력
-        PurchasePrice purchasePrice = getPurchasePrice();
+        try {
+            // 로또 구입 금액 입력
+            PurchasePrice purchasePrice = getPurchasePrice();
 
-        // 로또 발행 및 출력
-        PublishedLotto publishedLotto = publishAndPrintLotto(purchasePrice);
+            // 로또 발행 및 출력
+            PublishedLotto publishedLotto = publishAndPrintLotto(purchasePrice);
 
-        // 당첨 로또 입력
-        WinningLotto winningLotto = getWinningLotto();
+            // 당첨 로또 입력
+            WinningLotto winningLotto = getWinningLotto();
 
-        // 번호 비교
-        List<CompareResult> compareResults = lottoComparator.getCompareResults(publishedLotto, winningLotto);
+            // 번호 비교
+            List<CompareResult> compareResults = lottoComparator.getCompareResults(publishedLotto, winningLotto);
 
-        // 수익률 계산
-        double profitRate = prizeCalculator.getProfitRate(purchasePrice, compareResults);
+            // 수익률 계산
+            double profitRate = prizeCalculator.getProfitRate(purchasePrice, compareResults);
 
-        //결과 출력
-        ResultForView resultForView = new ResultForView();
-        resultForView.getResultForView(compareResults);
-        outputView.printWinningResult(resultForView, profitRate);
+            //결과 출력
+            ResultForView resultForView = new ResultForView();
+            resultForView.getResultForView(compareResults);
+            outputView.printWinningResult(resultForView, profitRate);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     private PurchasePrice getPurchasePrice() {
@@ -75,9 +82,7 @@ public class LottoController {
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
 
-        int bonusNumber = getBonusNumber();
-
-        winningLotto.addBonusNumber(bonusNumber);
+        addBonusNumber(winningLotto);
 
         return winningLotto;
     }
@@ -86,6 +91,12 @@ public class LottoController {
         String initialWinningNumbers = inputView.getWinningNumbers();
 
         return lottoConverter.convertToLotto(initialWinningNumbers);
+    }
+
+    private void addBonusNumber(WinningLotto winningLotto) {
+        int bonusNumber = getBonusNumber();
+
+        winningLotto.addBonusNumber(bonusNumber);
     }
 
     private int getBonusNumber() {
