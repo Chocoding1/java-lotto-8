@@ -5,9 +5,12 @@ import lotto.model.domain.Lotto;
 import lotto.model.dto.ResultForView;
 import lotto.model.dto.PublishedLottoDto;
 
-public class OutputView {
+public final class OutputView {
 
-    public void printPublishedResult(PublishedLottoDto publishedLottoDto) {
+    private OutputView() {
+    }
+
+    public static void printPublishedResult(PublishedLottoDto publishedLottoDto) {
         System.out.println(publishedLottoDto.getLottoCount() + "개를 구매했습니다.");
         for (Lotto lotto : publishedLottoDto.getLottos()) {
             System.out.println(lotto);
@@ -15,7 +18,7 @@ public class OutputView {
 
     }
 
-    public void printWinningResult(ResultForView resultForView, double rateOfReturn) {
+    public static void printWinningResult(ResultForView resultForView, double rateOfReturn) {
         Map<Integer, Integer> result = resultForView.getResultCount();
         System.out.println("당첨 통계");
         System.out.println("---");
