@@ -29,6 +29,7 @@ public class ResultForView {
 
             if (matchCount == 6 && bonusMatch) {
                 bonus++;
+                continue;
             }
 
             resultCount.put(matchCount, resultCount.getOrDefault(matchCount, 0) + 1);
