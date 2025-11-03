@@ -83,7 +83,7 @@ public class LottoController {
     }
 
     private List<Integer> convertToIntsAndValidate(String initialWinningNumbers) {
-        return Arrays.stream(initialWinningNumbers.split(","))
+        return Arrays.stream(InputUtil.splitInitialNumbers(initialWinningNumbers))
                 .map(InputUtil::convertToInt)
                 .peek(LottoNumberUtil::validateNumber)
                 .toList();
