@@ -1,4 +1,4 @@
-package lotto.model.domain;
+package lotto.model.domain.lotto;
 
 import java.util.List;
 
@@ -18,4 +18,9 @@ public class PublishedLotto {
         return lottos.size();
     }
 
+    public List<List<Integer>> getLottoNumbers() {
+        return lottos.stream()
+                .map(Lotto::getNumbers)
+                .toList();
+    }
 }
