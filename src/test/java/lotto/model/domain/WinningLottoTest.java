@@ -25,7 +25,7 @@ class WinningLottoTest {
     }
 
     @Test
-    @DisplayName("로또 번호와 중복된 보너스 번호 입력 시 예외 발생")
+    @DisplayName("당첨 번호와 중복된 보너스 번호 입력 시 예외 발생")
     void addBonusNumber_fail_when_duplicate_bonus_number() {
         // given
         WinningLotto winningLotto = new WinningLotto(List.of(1, 2, 3, 4, 5, 6));
