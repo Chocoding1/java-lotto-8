@@ -7,7 +7,7 @@ public final class RetryUtils {
     private RetryUtils() {
     }
 
-    public static <T> T trySupplierUntilSuccess(Supplier<T> supplier) {
+    public static <T> T tryReturnUntilSuccess(Supplier<T> supplier) {
         while (true) {
             try {
                 return supplier.get();
@@ -17,7 +17,7 @@ public final class RetryUtils {
         }
     }
 
-    public static void tryRunnableUntilSuccess(Runnable runnable) {
+    public static void tryRunUntilSuccess(Runnable runnable) {
         while (true) {
             try {
                 runnable.run();
