@@ -22,34 +22,26 @@ public class LottoController {
 
     private final LottoPublisher lottoPublisher;
     private final LottoComparator lottoComparator;
-    private final LottoConverter lottoConverter;
     private final PrizeCalculator prizeCalculator;
 
     public LottoController(LottoPublisher lottoPublisher, LottoComparator lottoComparator,
-                           LottoConverter lottoConverter, PrizeCalculator prizeCalculator) {
+                           PrizeCalculator prizeCalculator) {
         this.lottoPublisher = lottoPublisher;
         this.lottoComparator = lottoComparator;
-        this.lottoConverter = lottoConverter;
         this.prizeCalculator = prizeCalculator;
     }
 
     public void playLotto() {
-        // 로또 구입 금액 입력
         PurchasePrice purchasePrice = RetryUtil.tryReturnUntilSuccess(this::getPurchasePrice);
 
-        // 로또 발행 및 출력
         PublishedLotto publishedLotto = publishAndPrintLotto(purchasePrice);
 
-        // 당첨 로또 입력
         WinningLotto winningLotto = getWinningLotto();
 
-        // 번호 비교
         List<CompareResult> compareResults = lottoComparator.getCompareResults(publishedLotto, winningLotto);
 
-        // 수익률 계산
         double profitRate = prizeCalculator.getProfitRate(purchasePrice, compareResults);
 
-        //결과 출력
         printLottoResult(compareResults, profitRate);
 
     }
