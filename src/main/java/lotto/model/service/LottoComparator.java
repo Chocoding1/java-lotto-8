@@ -15,7 +15,7 @@ public class LottoComparator {
     }
 
     private CompareResult getCompareResult(Lotto lotto, WinningLotto winningLotto) {
-        int matchCount = lotto.getMatchCount(winningLotto.getLotto());
+        int matchCount = lotto.getMatchCount(winningLotto);
         boolean bonusMatch = false;
 
         if (lotto.isContain(winningLotto.getBonusNumber())) {
