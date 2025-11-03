@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class LottoTest {
@@ -22,4 +23,31 @@ class LottoTest {
     }
 
     // TODO: 추가 기능 구현에 따른 테스트 코드 작성
+
+    @DisplayName("입력한 로또에 존재하는 번호를 입력하면 예외를 발생한다.")
+    @Test
+    void throw_exception_when_duplicate_number_in_lotto() {
+        // given
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        int duplicateNumber = 6;
+
+        // when & then
+        assertThatThrownBy(() -> lotto.validateDuplicateNumber(duplicateNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @DisplayName("두 로또를 입력하여 중복된 번호의 개수를 반환한다. (4개 반환)")
+    @Test
+    void get_duplicate_lotto_numbers_count_() {
+        // given
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
+        Lotto winningLotto = new Lotto(List.of(1, 2, 3, 5, 7, 9));
+
+        // when & then
+        int matchCount = lotto.getMatchCount(winningLotto);
+
+        // then
+        assertThat(matchCount).isEqualTo(4);
+    }
 }
