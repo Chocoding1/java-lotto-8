@@ -17,15 +17,15 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    private List<Integer> getNumbers() {
+    protected List<Integer> getNumbers() {
         return numbers;
     }
 
-    public void validateDuplicateNumber(int number) {
-        if (numbers.contains(number)) {
-            throw new IllegalArgumentException(DUPLICATE_NUMBER_IN_LOTTO);
-        }
-    }
+//    public void validateDuplicateNumber(int number) {
+//        if (numbers.contains(number)) {
+//            throw new IllegalArgumentException(DUPLICATE_NUMBER_IN_LOTTO);
+//        }
+//    }
 
     public int getMatchCount(Lotto winningLotto) {
         List<Integer> winningNumbers = winningLotto.getNumbers();

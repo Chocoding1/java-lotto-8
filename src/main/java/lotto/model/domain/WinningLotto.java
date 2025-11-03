@@ -1,22 +1,29 @@
 package lotto.model.domain;
 
-public class WinningLotto {
+import static lotto.model.constant.ErrorMessage.DUPLICATE_NUMBER_IN_LOTTO;
 
-    private final Lotto lotto;
-    private int bonusNumber;
+import java.util.List;
 
-    public WinningLotto(Lotto lotto) {
-        this.lotto = lotto;
-    }
+public class WinningLotto extends Lotto {
 
-    public void addBonusNumber(int bonusNumber) {
-        lotto.validateDuplicateNumber(bonusNumber);
+    private final int bonusNumber;
+
+    public WinningLotto(List<Integer> numbers, int bonusNumber) {
+        super(numbers);
+        validateDuplicateNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
 
-    public Lotto getLotto() {
-        return lotto;
+    private void validateDuplicateNumber(int bonusNumber) {
+        if (getNumbers().contains(bonusNumber)) {
+            throw new IllegalArgumentException(DUPLICATE_NUMBER_IN_LOTTO);
+        }
     }
+
+//    public void addBonusNumber(int bonusNumber) {
+//        lotto.validateDuplicateNumber(bonusNumber);
+//        this.bonusNumber = bonusNumber;
+//    }
 
     public int getBonusNumber() {
         return bonusNumber;
