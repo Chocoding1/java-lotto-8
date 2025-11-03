@@ -1,10 +1,13 @@
-package lotto.exception;
+package lotto.util;
 
 import java.util.function.Supplier;
 
-public class ExceptionHandler {
+public final class RetryUtils {
 
-    public <T> T trySupplierUntilSuccess(Supplier<T> supplier) {
+    private RetryUtils() {
+    }
+
+    public static <T> T trySupplierUntilSuccess(Supplier<T> supplier) {
         while (true) {
             try {
                 return supplier.get();
@@ -14,7 +17,7 @@ public class ExceptionHandler {
         }
     }
 
-    public void tryRunnableUntilSuccess(Runnable runnable) {
+    public static void tryRunnableUntilSuccess(Runnable runnable) {
         while (true) {
             try {
                 runnable.run();
