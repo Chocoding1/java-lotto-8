@@ -69,9 +69,11 @@ public class LottoController {
     }
 
     private WinningLotto getWinningLotto() {
-        List<Integer> winningNumbers = RetryUtil.tryReturnUntilSuccess(this::getWinningNumbers);
+        WinningLotto winningLotto = RetryUtil.tryReturnUntilSuccess(() -> {
+            List<Integer> winningNumbers = getWinningNumbers();
 
-        WinningLotto winningLotto = new WinningLotto(winningNumbers);
+            return new WinningLotto(winningNumbers);
+        });
 
         RetryUtil.tryRunUntilSuccess(() -> addBonusNumber(winningLotto));
 
