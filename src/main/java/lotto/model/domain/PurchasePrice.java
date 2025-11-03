@@ -1,7 +1,7 @@
 package lotto.model.domain;
 
-import static lotto.exception.ErrorMessage.PRICE_LESS_THAN_LOTTO_PRICE;
-import static lotto.exception.ErrorMessage.PRICE_NOT_UNITS_OF_LOTTO_PRICE;
+import static lotto.model.constant.ErrorMessage.PRICE_LESS_THAN_LOTTO_PRICE;
+import static lotto.model.constant.ErrorMessage.PRICE_NOT_UNITS_OF_LOTTO_PRICE;
 
 public class PurchasePrice {
 

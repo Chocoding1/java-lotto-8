@@ -1,8 +1,8 @@
 package lotto;
 
-import static lotto.exception.ErrorMessage.DUPLICATE_NUMBER_IN_LOTTO;
-import static lotto.exception.ErrorMessage.DUPLICATE_NUMBER_OF_LOTTO;
-import static lotto.exception.ErrorMessage.INVALID_LOTTO_LENGTH;
+import static lotto.model.constant.ErrorMessage.DUPLICATE_NUMBER_IN_LOTTO;
+import static lotto.model.constant.ErrorMessage.DUPLICATE_NUMBER_OF_LOTTO;
+import static lotto.model.constant.ErrorMessage.INVALID_LOTTO_LENGTH;
 import static lotto.model.constant.LottoConstant.LOTTO_LENGTH;
 
 import java.util.List;

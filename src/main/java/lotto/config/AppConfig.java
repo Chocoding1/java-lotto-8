@@ -1,10 +1,10 @@
 package lotto.config;
 
 import lotto.controller.LottoController;
-import lotto.model.converter.LottoConverter;
+import lotto.model.service.LottoConverter;
 import lotto.model.service.LottoComparator;
-import lotto.model.service.LottoNumberExtractor;
-import lotto.model.service.LottoPublisher;
+import lotto.model.service.lottopublisher.LottoNumberExtractor;
+import lotto.model.service.lottopublisher.LottoPublisher;
 import lotto.model.service.PrizeCalculator;
 
 public class AppConfig {

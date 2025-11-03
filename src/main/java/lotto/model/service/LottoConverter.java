@@ -1,4 +1,4 @@
-package lotto.model.converter;
+package lotto.model.service;
 
 import java.util.Arrays;
 import lotto.Lotto;

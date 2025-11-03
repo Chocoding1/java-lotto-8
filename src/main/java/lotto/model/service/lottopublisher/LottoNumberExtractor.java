@@ -1,4 +1,4 @@
-package lotto.model.service;
+package lotto.model.service.lottopublisher;
 
 import static lotto.model.constant.LottoConstant.LOTTO_LENGTH;
 import static lotto.model.constant.LottoConstant.MAX_NUMBER;

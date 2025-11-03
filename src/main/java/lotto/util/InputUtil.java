@@ -1,6 +1,6 @@
 package lotto.util;
 
-import static lotto.exception.ErrorMessage.INPUT_VALUE_NOT_INTEGER;
+import static lotto.model.constant.ErrorMessage.INPUT_VALUE_NOT_INTEGER;
 
 public final class InputUtil {
 
