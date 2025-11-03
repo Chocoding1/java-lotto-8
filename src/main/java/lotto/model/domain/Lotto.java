@@ -1,7 +1,7 @@
 package lotto.model.domain;
 
+import static lotto.model.constant.ErrorMessage.LOTTO_CONTAINS_DUPLICATE_NUMBERS;
 import static lotto.model.constant.ErrorMessage.DUPLICATE_NUMBER_IN_LOTTO;
-import static lotto.model.constant.ErrorMessage.DUPLICATE_NUMBER_OF_LOTTO;
 import static lotto.model.constant.ErrorMessage.INVALID_LOTTO_LENGTH;
 import static lotto.model.constant.LottoConstant.LOTTO_LENGTH;
 
@@ -17,13 +17,13 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public List<Integer> getNumbers() {
+    private List<Integer> getNumbers() {
         return numbers;
     }
 
     public void validateDuplicateNumber(int number) {
         if (numbers.contains(number)) {
-            throw new IllegalArgumentException(DUPLICATE_NUMBER_OF_LOTTO);
+            throw new IllegalArgumentException(DUPLICATE_NUMBER_IN_LOTTO);
         }
     }
 
@@ -53,7 +53,7 @@ public class Lotto {
     private void validateDuplicateNumbers(List<Integer> numbers) {
         Set<Integer> uniqueNumbers = Set.copyOf(numbers);
         if (numbers.size() != uniqueNumbers.size()) {
-            throw new IllegalArgumentException(DUPLICATE_NUMBER_IN_LOTTO);
+            throw new IllegalArgumentException(LOTTO_CONTAINS_DUPLICATE_NUMBERS);
         }
     }
 
