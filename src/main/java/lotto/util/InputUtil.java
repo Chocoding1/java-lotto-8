@@ -1,5 +1,7 @@
 package lotto.util;
 
+import static lotto.exception.ErrorMessage.INPUT_VALUE_NOT_INTEGER;
+
 public final class InputUtil {
 
     private InputUtil() {
@@ -9,7 +11,7 @@ public final class InputUtil {
         try {
             return Integer.parseInt(inputValue);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 입력값은 정수 형태의 숫자여야 합니다.");
+            throw new IllegalArgumentException(INPUT_VALUE_NOT_INTEGER);
         }
     }
 }

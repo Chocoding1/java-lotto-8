@@ -1,5 +1,9 @@
 package lotto.model.domain;
 
+import static lotto.exception.ErrorMessage.DUPLICATE_NUMBER_IN_LOTTO;
+import static lotto.exception.ErrorMessage.DUPLICATE_NUMBER_OF_LOTTO;
+import static lotto.exception.ErrorMessage.INVALID_LOTTO_LENGTH;
+
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,7 +22,7 @@ public class Lotto {
 
     public void validateDuplicateNumber(int number) {
         if (numbers.contains(number)) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호와 중복된 번호입니다.");
+            throw new IllegalArgumentException(DUPLICATE_NUMBER_OF_LOTTO);
         }
     }
 
@@ -41,14 +45,14 @@ public class Lotto {
 
     private void validateLottoSize(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+            throw new IllegalArgumentException(INVALID_LOTTO_LENGTH);
         }
     }
 
     private void validateDuplicateNumbers(List<Integer> numbers) {
         Set<Integer> uniqueNumbers = Set.copyOf(numbers);
         if (numbers.size() != uniqueNumbers.size()) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 중복된 숫자를 포함하지 않아야 합니다.");
+            throw new IllegalArgumentException(DUPLICATE_NUMBER_IN_LOTTO);
         }
     }
 
