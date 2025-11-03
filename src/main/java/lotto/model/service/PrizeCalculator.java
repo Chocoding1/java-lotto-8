@@ -29,7 +29,8 @@ public class PrizeCalculator {
 
     public double getProfitRate(PurchasePrice purchasePrice, List<CompareResult> compareResults) {
         int totalPrize = getTotalPrize(compareResults);
-        return Math.round(calculateProfitRate(totalPrize, purchasePrice) * 10) / 10.0;
+
+        return roundProfitRate(calculateProfitRate(totalPrize, purchasePrice));
     }
 
     private int getTotalPrize(List<CompareResult> compareResults) {
@@ -54,5 +55,9 @@ public class PrizeCalculator {
 
     private double calculateProfitRate(int totalPrize, PurchasePrice purchasePrice) {
         return (double) totalPrize / purchasePrice.getPrice() * NUMBER_FOR_PERCENT;
+    }
+
+    private double roundProfitRate(double profitRate) {
+        return Math.round(profitRate * 10) / 10.0;
     }
 }
