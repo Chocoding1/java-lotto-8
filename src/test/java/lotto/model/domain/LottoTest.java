@@ -22,8 +22,6 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    // TODO: 추가 기능 구현에 따른 테스트 코드 작성
-
     @DisplayName("입력한 로또에 존재하는 번호를 입력하면 예외를 발생한다.")
     @Test
     void throw_exception_when_duplicate_number_in_lotto() {
