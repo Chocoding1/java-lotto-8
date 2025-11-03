@@ -1,4 +1,4 @@
-package lotto.model.service;
+package lotto.model.service.prizecalculator;
 
 import static lotto.model.constant.LottoConstant.BONUS_MATCH_PRIZE;
 import static lotto.model.constant.LottoConstant.FIVE_MATCH;
@@ -26,11 +26,16 @@ public class PrizeCalculator {
             FIVE_MATCH, FIVE_MATCH_PRIZE,
             SIX_MATCH, SIX_MATCH_PRIZE
     );
+    private final NumberRounder numberRounder;
+
+    public PrizeCalculator(NumberRounder numberRounder) {
+        this.numberRounder = numberRounder;
+    }
 
     public double getProfitRate(PurchasePrice purchasePrice, List<CompareResult> compareResults) {
         int totalPrize = getTotalPrize(compareResults);
 
-        return roundProfitRate(calculateProfitRate(totalPrize, purchasePrice));
+        return numberRounder.roundTenthsPlaceValue(calculateProfitRate(totalPrize, purchasePrice));
     }
 
     private int getTotalPrize(List<CompareResult> compareResults) {
@@ -55,9 +60,5 @@ public class PrizeCalculator {
 
     private double calculateProfitRate(int totalPrize, PurchasePrice purchasePrice) {
         return (double) totalPrize / purchasePrice.getPrice() * NUMBER_FOR_PERCENT;
-    }
-
-    private double roundProfitRate(double profitRate) {
-        return Math.round(profitRate * 10) / 10.0;
     }
 }

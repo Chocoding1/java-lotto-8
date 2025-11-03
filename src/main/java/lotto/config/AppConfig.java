@@ -4,7 +4,8 @@ import lotto.controller.LottoController;
 import lotto.model.service.LottoComparator;
 import lotto.model.service.lottopublisher.LottoNumberExtractor;
 import lotto.model.service.lottopublisher.LottoPublisher;
-import lotto.model.service.PrizeCalculator;
+import lotto.model.service.prizecalculator.NumberRounder;
+import lotto.model.service.prizecalculator.PrizeCalculator;
 
 public class AppConfig {
 
@@ -13,6 +14,7 @@ public class AppConfig {
     private LottoNumberExtractor lottoNumberExtractor;
     private LottoComparator lottoComparator;
     private PrizeCalculator prizeCalculator;
+    private NumberRounder numberRounder;
 
     public LottoController lottoController() {
         if (lottoController == null) {
@@ -44,8 +46,15 @@ public class AppConfig {
 
     public PrizeCalculator prizeCalculator() {
         if (prizeCalculator == null) {
-            prizeCalculator = new PrizeCalculator();
+            prizeCalculator = new PrizeCalculator(numberRounder());
         }
         return prizeCalculator;
+    }
+
+    public NumberRounder numberRounder() {
+        if (numberRounder == null) {
+            numberRounder = new NumberRounder();
+        }
+        return numberRounder;
     }
 }
