@@ -22,19 +22,6 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-//    @DisplayName("입력한 로또에 존재하는 번호를 입력하면 예외를 발생한다.")
-//    @Test
-//    void throw_exception_when_duplicate_number_in_lotto() {
-//        // given
-//        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
-//        int duplicateNumber = 6;
-//
-//        // when & then
-//        assertThatThrownBy(() -> lotto.validateDuplicateNumber(duplicateNumber))
-//                .isInstanceOf(IllegalArgumentException.class)
-//                .hasMessageContaining("[ERROR]");
-//    }
-
     @DisplayName("두 로또를 입력하여 중복된 번호의 개수를 반환한다. (4개 반환)")
     @Test
     void get_duplicate_lotto_numbers_count_() {
