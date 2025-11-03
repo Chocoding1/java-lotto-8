@@ -1,4 +1,4 @@
-package lotto.hadler;
+package lotto.exception;
 
 import java.util.function.Supplier;
 

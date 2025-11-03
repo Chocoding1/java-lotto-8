@@ -1,7 +1,7 @@
 package lotto.config;
 
 import lotto.controller.LottoController;
-import lotto.hadler.ExceptionHandler;
+import lotto.exception.ExceptionHandler;
 import lotto.model.converter.LottoConverter;
 import lotto.model.service.LottoComparator;
 import lotto.model.service.LottoPublisher;

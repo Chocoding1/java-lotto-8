@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import java.util.List;
-import lotto.hadler.ExceptionHandler;
+import lotto.exception.ExceptionHandler;
 import lotto.model.domain.CompareResult;
 import lotto.model.domain.Lotto;
 import lotto.model.dto.ResultForView;
