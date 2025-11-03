@@ -1,7 +1,5 @@
 package lotto.model.domain;
 
-import lotto.Lotto;
-
 public class WinningLotto {
 
     private final Lotto lotto;

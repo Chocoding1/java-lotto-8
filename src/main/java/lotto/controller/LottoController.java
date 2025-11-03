@@ -2,7 +2,7 @@ package lotto.controller;
 
 import java.util.List;
 import lotto.model.domain.CompareResult;
-import lotto.Lotto;
+import lotto.model.domain.Lotto;
 import lotto.model.dto.ResultForView;
 import lotto.model.service.LottoComparator;
 import lotto.model.service.lottopublisher.LottoPublisher;
