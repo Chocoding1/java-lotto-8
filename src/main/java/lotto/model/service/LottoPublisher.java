@@ -1,10 +1,5 @@
 package lotto.model.service;
 
-import static lotto.model.constant.LottoConstant.LOTTO_LENGTH;
-import static lotto.model.constant.LottoConstant.MAX_NUMBER;
-import static lotto.model.constant.LottoConstant.MIN_NUMBER;
-
-import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
 import lotto.model.domain.Lotto;
@@ -13,7 +8,12 @@ import lotto.model.domain.PurchasePrice;
 
 public class LottoPublisher {
 
-    // 정적 메소드 알아봐
+    private final LottoNumberExtractor lottoNumberExtractor;
+
+    public LottoPublisher(LottoNumberExtractor lottoNumberExtractor) {
+        this.lottoNumberExtractor = lottoNumberExtractor;
+    }
+
     public PublishedLotto publishLotto(PurchasePrice purchasePrice) {
         int quantity = purchasePrice.getLottoQuantity();
 
@@ -24,7 +24,7 @@ public class LottoPublisher {
         return new PublishedLotto(lottos);
     }
 
-    private static Lotto getLotto() {
-        return new Lotto(Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_LENGTH));
+    private Lotto getLotto() {
+        return new Lotto(lottoNumberExtractor.extractNumbers());
     }
 }
