@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import static lotto.util.RetryUtil.*;
+
 import java.util.Arrays;
 import java.util.List;
 import lotto.model.domain.CompareResult;
@@ -10,11 +12,9 @@ import lotto.model.service.PrizeCalculator;
 import lotto.model.domain.PublishedLotto;
 import lotto.model.domain.PurchasePrice;
 import lotto.model.domain.WinningLotto;
-import lotto.model.service.LottoConverter;
 import lotto.model.dto.PublishedLottoDto;
 import lotto.util.InputUtil;
 import lotto.model.validator.LottoNumberValidator;
-import lotto.util.RetryUtil;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -32,7 +32,7 @@ public class LottoController {
     }
 
     public void playLotto() {
-        PurchasePrice purchasePrice = RetryUtil.tryReturnUntilSuccess(this::getPurchasePrice);
+        PurchasePrice purchasePrice = tryReturnUntilSuccess(this::getPurchasePrice);
 
         PublishedLotto publishedLotto = publishAndPrintLotto(purchasePrice);
 
@@ -69,13 +69,13 @@ public class LottoController {
     }
 
     private WinningLotto getWinningLotto() {
-        WinningLotto winningLotto = RetryUtil.tryReturnUntilSuccess(() -> {
+        WinningLotto winningLotto = tryReturnUntilSuccess(() -> {
             List<Integer> winningNumbers = getWinningNumbers();
 
             return new WinningLotto(winningNumbers);
         });
 
-        RetryUtil.tryRunUntilSuccess(() -> addBonusNumber(winningLotto));
+        tryRunUntilSuccess(() -> addBonusNumber(winningLotto));
 
         return winningLotto;
     }
