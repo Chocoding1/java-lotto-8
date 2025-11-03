@@ -21,7 +21,7 @@ public class AppConfig {
     public LottoController lottoController() {
         if (lottoController == null) {
             lottoController = new LottoController(lottoPublisher(), lottoComparator(),
-                    lottoConverter(), prizeCalculator());
+                    lottoConverter(), prizeCalculator(), retryUtils());
         }
         return lottoController;
     }
