@@ -24,7 +24,6 @@ public class LottoController {
     private final LottoComparator lottoComparator;
     private final LottoConverter lottoConverter;
     private final PrizeCalculator prizeCalculator;
-//    private final RetryUtil retryUtil;
 
     public LottoController(LottoPublisher lottoPublisher, LottoComparator lottoComparator,
                            LottoConverter lottoConverter, PrizeCalculator prizeCalculator) {
@@ -32,7 +31,6 @@ public class LottoController {
         this.lottoComparator = lottoComparator;
         this.lottoConverter = lottoConverter;
         this.prizeCalculator = prizeCalculator;
-//        this.retryUtil = retryUtil;
     }
 
     public void playLotto() {
