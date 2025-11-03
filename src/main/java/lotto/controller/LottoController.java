@@ -14,7 +14,7 @@ import lotto.model.converter.LottoConverter;
 import lotto.model.dto.PublishedLottoDto;
 import lotto.util.InputUtil;
 import lotto.model.validator.LottoNumberValidator;
-import lotto.util.ExceptionHandler;
+import lotto.util.RetryUtil;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -24,21 +24,21 @@ public class LottoController {
     private final LottoComparator lottoComparator;
     private final LottoConverter lottoConverter;
     private final PrizeCalculator prizeCalculator;
-    private final ExceptionHandler exceptionHandler;
+    private final RetryUtil retryUtil;
 
     public LottoController(LottoPublisher lottoPublisher, LottoComparator lottoComparator,
                            LottoConverter lottoConverter, PrizeCalculator prizeCalculator,
-                           ExceptionHandler exceptionHandler) {
+                           RetryUtil retryUtil) {
         this.lottoPublisher = lottoPublisher;
         this.lottoComparator = lottoComparator;
         this.lottoConverter = lottoConverter;
         this.prizeCalculator = prizeCalculator;
-        this.exceptionHandler = exceptionHandler;
+        this.retryUtil = retryUtil;
     }
 
     public void playLotto() {
         // 로또 구입 금액 입력
-        PurchasePrice purchasePrice = exceptionHandler.tryReturnUntilSuccess(this::getPurchasePrice);
+        PurchasePrice purchasePrice = retryUtil.tryReturnUntilSuccess(this::getPurchasePrice);
 
         // 로또 발행 및 출력
         PublishedLotto publishedLotto = publishAndPrintLotto(purchasePrice);
@@ -80,11 +80,11 @@ public class LottoController {
     }
 
     private WinningLotto getWinningLotto() {
-        Lotto winningLottoNumbers = exceptionHandler.tryReturnUntilSuccess(this::getWinningNumbers);
+        Lotto winningLottoNumbers = retryUtil.tryReturnUntilSuccess(this::getWinningNumbers);
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
 
-        exceptionHandler.tryRunUntilSuccess(() -> addBonusNumber(winningLotto));
+        retryUtil.tryRunUntilSuccess(() -> addBonusNumber(winningLotto));
 
         return winningLotto;
     }
