@@ -19,12 +19,12 @@ public class LottoPublisher {
 
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < quantity; i++) {
-            lottos.add(getLotto());
+            lottos.add(createLotto());
         }
         return new PublishedLotto(lottos);
     }
 
-    private Lotto getLotto() {
+    private Lotto createLotto() {
         return new Lotto(lottoNumberExtractor.extractNumbers());
     }
 }
