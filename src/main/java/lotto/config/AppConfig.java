@@ -6,7 +6,7 @@ import lotto.model.service.LottoComparator;
 import lotto.model.service.LottoNumberExtractor;
 import lotto.model.service.LottoPublisher;
 import lotto.model.service.PrizeCalculator;
-import lotto.util.RetryUtils;
+import lotto.util.ExceptionHandler;
 
 public class AppConfig {
 
@@ -16,7 +16,7 @@ public class AppConfig {
     private LottoComparator lottoComparator;
     private LottoConverter lottoConverter;
     private PrizeCalculator prizeCalculator;
-    private RetryUtils retryUtils;
+    private ExceptionHandler exceptionHandler;
 
     public LottoController lottoController() {
         if (lottoController == null) {
@@ -61,10 +61,10 @@ public class AppConfig {
         return prizeCalculator;
     }
 
-    public RetryUtils retryUtils() {
-        if (retryUtils == null) {
-            retryUtils = new RetryUtils();
+    public ExceptionHandler retryUtils() {
+        if (exceptionHandler == null) {
+            exceptionHandler = new ExceptionHandler();
         }
-        return retryUtils;
+        return exceptionHandler;
     }
 }
