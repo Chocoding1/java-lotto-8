@@ -1,5 +1,6 @@
 package lotto.model.service;
 
+import static lotto.model.constant.LottoConstant.LOTTO_LENGTH;
 import static lotto.model.constant.LottoConstant.MAX_NUMBER;
 import static lotto.model.constant.LottoConstant.MIN_NUMBER;
 
@@ -11,8 +12,6 @@ import lotto.model.domain.PublishedLotto;
 import lotto.model.domain.PurchasePrice;
 
 public class LottoPublisher {
-
-    private static final int NUMBER_COUNT = 6;
 
     // 정적 메소드 알아봐
     public PublishedLotto publishLotto(PurchasePrice purchasePrice) {
@@ -26,6 +25,6 @@ public class LottoPublisher {
     }
 
     private static Lotto getLotto() {
-        return new Lotto(Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, NUMBER_COUNT));
+        return new Lotto(Randoms.pickUniqueNumbersInRange(MIN_NUMBER, MAX_NUMBER, LOTTO_LENGTH));
     }
 }

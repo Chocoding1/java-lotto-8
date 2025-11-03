@@ -1,7 +1,7 @@
 package lotto.model.domain;
 
-import static lotto.exception.ErrorMessage.PRICE_LESS_THAN_1000;
-import static lotto.exception.ErrorMessage.PRICE_NOT_UNITS_OF_1000;
+import static lotto.exception.ErrorMessage.PRICE_LESS_THAN_LOTTO_PRICE;
+import static lotto.exception.ErrorMessage.PRICE_NOT_UNITS_OF_LOTTO_PRICE;
 
 public class PurchasePrice {
 
@@ -15,12 +15,12 @@ public class PurchasePrice {
     }
 
     private void validatePrice(int price) {
-        if (price < 1000) {
-            throw new IllegalArgumentException(PRICE_LESS_THAN_1000);
+        if (price < LOTTO_PRICE) {
+            throw new IllegalArgumentException(PRICE_LESS_THAN_LOTTO_PRICE);
         }
 
-        if (price % 1000 != 0) {
-            throw new IllegalArgumentException(PRICE_NOT_UNITS_OF_1000);
+        if (price % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException(PRICE_NOT_UNITS_OF_LOTTO_PRICE);
         }
     }
 

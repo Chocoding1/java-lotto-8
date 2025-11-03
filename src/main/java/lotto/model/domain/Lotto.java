@@ -3,6 +3,7 @@ package lotto.model.domain;
 import static lotto.exception.ErrorMessage.DUPLICATE_NUMBER_IN_LOTTO;
 import static lotto.exception.ErrorMessage.DUPLICATE_NUMBER_OF_LOTTO;
 import static lotto.exception.ErrorMessage.INVALID_LOTTO_LENGTH;
+import static lotto.model.constant.LottoConstant.LOTTO_LENGTH;
 
 import java.util.List;
 import java.util.Set;
@@ -44,7 +45,7 @@ public class Lotto {
     }
 
     private void validateLottoSize(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LOTTO_LENGTH) {
             throw new IllegalArgumentException(INVALID_LOTTO_LENGTH);
         }
     }
