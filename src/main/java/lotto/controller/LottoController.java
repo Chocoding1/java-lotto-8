@@ -8,7 +8,7 @@ import lotto.model.domain.CompareResult;
 import lotto.model.dto.ResultForView;
 import lotto.model.service.LottoComparator;
 import lotto.model.service.lottopublisher.LottoPublisher;
-import lotto.model.service.PrizeCalculator;
+import lotto.model.service.prizecalculator.PrizeCalculator;
 import lotto.model.domain.PublishedLotto;
 import lotto.model.domain.PurchasePrice;
 import lotto.model.domain.WinningLotto;
