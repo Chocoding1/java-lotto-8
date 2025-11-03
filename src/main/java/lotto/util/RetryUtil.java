@@ -2,9 +2,12 @@ package lotto.util;
 
 import java.util.function.Supplier;
 
-public class RetryUtil {
+public final class RetryUtil {
 
-    public <T> T tryReturnUntilSuccess(Supplier<T> supplier) {
+    private RetryUtil() {
+    }
+
+    public static <T> T tryReturnUntilSuccess(Supplier<T> supplier) {
         while (true) {
             try {
                 return supplier.get();
@@ -14,7 +17,7 @@ public class RetryUtil {
         }
     }
 
-    public void tryRunUntilSuccess(Runnable runnable) {
+    public static void tryRunUntilSuccess(Runnable runnable) {
         while (true) {
             try {
                 runnable.run();

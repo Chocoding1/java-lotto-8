@@ -24,21 +24,20 @@ public class LottoController {
     private final LottoComparator lottoComparator;
     private final LottoConverter lottoConverter;
     private final PrizeCalculator prizeCalculator;
-    private final RetryUtil retryUtil;
+//    private final RetryUtil retryUtil;
 
     public LottoController(LottoPublisher lottoPublisher, LottoComparator lottoComparator,
-                           LottoConverter lottoConverter, PrizeCalculator prizeCalculator,
-                           RetryUtil retryUtil) {
+                           LottoConverter lottoConverter, PrizeCalculator prizeCalculator) {
         this.lottoPublisher = lottoPublisher;
         this.lottoComparator = lottoComparator;
         this.lottoConverter = lottoConverter;
         this.prizeCalculator = prizeCalculator;
-        this.retryUtil = retryUtil;
+//        this.retryUtil = retryUtil;
     }
 
     public void playLotto() {
         // 로또 구입 금액 입력
-        PurchasePrice purchasePrice = retryUtil.tryReturnUntilSuccess(this::getPurchasePrice);
+        PurchasePrice purchasePrice = RetryUtil.tryReturnUntilSuccess(this::getPurchasePrice);
 
         // 로또 발행 및 출력
         PublishedLotto publishedLotto = publishAndPrintLotto(purchasePrice);
@@ -80,11 +79,11 @@ public class LottoController {
     }
 
     private WinningLotto getWinningLotto() {
-        Lotto winningLottoNumbers = retryUtil.tryReturnUntilSuccess(this::getWinningNumbers);
+        Lotto winningLottoNumbers = RetryUtil.tryReturnUntilSuccess(this::getWinningNumbers);
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
 
-        retryUtil.tryRunUntilSuccess(() -> addBonusNumber(winningLotto));
+        RetryUtil.tryRunUntilSuccess(() -> addBonusNumber(winningLotto));
 
         return winningLotto;
     }

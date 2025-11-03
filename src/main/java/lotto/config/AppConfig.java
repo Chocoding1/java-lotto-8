@@ -16,12 +16,12 @@ public class AppConfig {
     private LottoComparator lottoComparator;
     private LottoConverter lottoConverter;
     private PrizeCalculator prizeCalculator;
-    private RetryUtil retryUtil;
+//    private RetryUtil retryUtil;
 
     public LottoController lottoController() {
         if (lottoController == null) {
             lottoController = new LottoController(lottoPublisher(), lottoComparator(), lottoConverter(),
-                    prizeCalculator(), exceptionHandler());
+                    prizeCalculator());
         }
         return lottoController;
     }
@@ -61,10 +61,10 @@ public class AppConfig {
         return prizeCalculator;
     }
 
-    public RetryUtil exceptionHandler() {
-        if (retryUtil == null) {
-            retryUtil = new RetryUtil();
-        }
-        return retryUtil;
-    }
+//    public RetryUtil exceptionHandler() {
+//        if (retryUtil == null) {
+//            retryUtil = new RetryUtil();
+//        }
+//        return retryUtil;
+//    }
 }
