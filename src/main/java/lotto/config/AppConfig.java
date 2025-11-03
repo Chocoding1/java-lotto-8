@@ -6,7 +6,7 @@ import lotto.model.service.LottoComparator;
 import lotto.model.service.LottoNumberExtractor;
 import lotto.model.service.LottoPublisher;
 import lotto.model.service.PrizeCalculator;
-import lotto.exception.ExceptionHandler;
+import lotto.util.ExceptionHandler;
 
 public class AppConfig {
 

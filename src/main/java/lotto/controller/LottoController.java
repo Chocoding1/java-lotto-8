@@ -14,7 +14,7 @@ import lotto.model.converter.LottoConverter;
 import lotto.model.dto.PublishedLottoDto;
 import lotto.util.InputUtil;
 import lotto.model.validator.LottoNumberValidator;
-import lotto.exception.ExceptionHandler;
+import lotto.util.ExceptionHandler;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
