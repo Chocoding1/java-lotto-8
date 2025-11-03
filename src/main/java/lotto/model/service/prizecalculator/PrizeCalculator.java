@@ -11,9 +11,10 @@ import static lotto.model.constant.LottoConstant.SIX_MATCH_PRIZE;
 import static lotto.model.constant.LottoConstant.THREE_MATCH;
 import static lotto.model.constant.LottoConstant.THREE_MATCH_PRIZE;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import lotto.model.domain.CompareResult;
+import lotto.model.domain.LottoRank;
 import lotto.model.domain.PurchasePrice;
 
 public class PrizeCalculator {
@@ -32,31 +33,35 @@ public class PrizeCalculator {
         this.numberRounder = numberRounder;
     }
 
-    public double getProfitRate(PurchasePrice purchasePrice, List<CompareResult> compareResults) {
-        int totalPrize = getTotalPrize(compareResults);
+    public double getProfitRate(PurchasePrice purchasePrice, EnumMap<LottoRank, Integer> rankCountMap) {
+        int totalPrize = getTotalPrize(rankCountMap);
 
         return numberRounder.roundTenthsPlaceValue(calculateProfitRate(totalPrize, purchasePrice));
     }
 
-    private int getTotalPrize(List<CompareResult> compareResults) {
-        return compareResults.stream()
-                .mapToInt(this::getPrize)
+    private int getTotalPrize(EnumMap<LottoRank, Integer> rankCountMap) {
+        return rankCountMap.entrySet().stream()
+                .mapToInt(entry -> entry.getKey().getPrize() * entry.getValue())
                 .sum();
+
+//        return compareResults.stream()
+//                .mapToInt(this::getPrize)
+//                .sum();
     }
 
-    private int getPrize(CompareResult compareResult) {
-        int matchCount = compareResult.getMatchCount();
-
-        if (matchCount < THREE_MATCH) {
-            return NOT_WINNING_PRIZE;
-        }
-
-        if (matchCount == SIX_MATCH && compareResult.isBonusMatch()) {
-            return BONUS_MATCH_PRIZE;
-        }
-
-        return prizeTable.get(matchCount);
-    }
+//    private int getPrize(CompareResult compareResult) {
+//        int matchCount = compareResult.getMatchCount();
+//
+//        if (matchCount < THREE_MATCH) {
+//            return NOT_WINNING_PRIZE;
+//        }
+//
+//        if (matchCount == SIX_MATCH && compareResult.isBonusMatch()) {
+//            return BONUS_MATCH_PRIZE;
+//        }
+//
+//        return prizeTable.get(matchCount);
+//    }
 
     private double calculateProfitRate(int totalPrize, PurchasePrice purchasePrice) {
         return (double) totalPrize / purchasePrice.getPrice() * NUMBER_FOR_PERCENT;

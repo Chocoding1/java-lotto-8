@@ -3,8 +3,10 @@ package lotto.controller;
 import static lotto.util.RetryUtil.*;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
 import lotto.model.domain.CompareResult;
+import lotto.model.domain.LottoRank;
 import lotto.model.dto.WinningResultDto;
 import lotto.model.service.LottoComparator;
 import lotto.model.service.lottopublisher.LottoPublisher;
@@ -38,12 +40,23 @@ public class LottoController {
 
         WinningLotto winningLotto = getWinningLotto();
 
-        List<CompareResult> compareResults = lottoComparator.getCompareResults(publishedLotto, winningLotto);
+        List<LottoRank> lottoRanks = lottoComparator.getCompareResults(publishedLotto, winningLotto);
 
-        double profitRate = prizeCalculator.getProfitRate(purchasePrice, compareResults);
+        EnumMap<LottoRank, Integer> rankCountMap = convertToEnumMap(lottoRanks);
 
-        printLottoResult(compareResults, profitRate);
+        double profitRate = prizeCalculator.getProfitRate(purchasePrice, rankCountMap);
 
+        printLottoResult(rankCountMap, profitRate);
+
+    }
+
+    private EnumMap<LottoRank, Integer> convertToEnumMap(List<LottoRank> lottoRanks) {
+        EnumMap<LottoRank, Integer> rankCountMap = new EnumMap<>(LottoRank.class);
+        for (LottoRank lottoRank : lottoRanks) {
+            rankCountMap.put(lottoRank, rankCountMap.getOrDefault(lottoRank, 0) + 1);
+        }
+
+        return rankCountMap;
     }
 
     private PurchasePrice getPurchasePrice() {
@@ -104,9 +117,8 @@ public class LottoController {
         return bonusNumber;
     }
 
-    private static void printLottoResult(List<CompareResult> compareResults, double profitRate) {
-        WinningResultDto winningResultDto = new WinningResultDto();
-        winningResultDto.getResultForView(compareResults);
+    private static void printLottoResult(EnumMap<LottoRank, Integer> rankCountMap, double profitRate) {
+        WinningResultDto winningResultDto = new WinningResultDto(rankCountMap);
         OutputView.printWinningResult(winningResultDto, profitRate);
     }
 }

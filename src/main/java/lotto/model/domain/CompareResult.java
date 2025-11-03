@@ -4,10 +4,12 @@ public class CompareResult {
 
     private final int matchCount;
     private final boolean bonusMatch;
+    private final LottoRank lottoRank;
 
     public CompareResult(int matchCount, boolean bonusMatch) {
         this.matchCount = matchCount;
         this.bonusMatch = bonusMatch;
+        this.lottoRank = LottoRank.getRank(matchCount, bonusMatch);
     }
 
     public int getMatchCount() {
@@ -16,5 +18,9 @@ public class CompareResult {
 
     public boolean isBonusMatch() {
         return bonusMatch;
+    }
+
+    public LottoRank getLottoRank() {
+        return lottoRank;
     }
 }

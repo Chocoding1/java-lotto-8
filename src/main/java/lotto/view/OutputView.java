@@ -1,8 +1,12 @@
 package lotto.view;
 
+import static lotto.model.domain.LottoRank.*;
+
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lotto.model.domain.LottoRank;
 import lotto.model.dto.WinningResultDto;
 import lotto.model.dto.PublishedLottoDto;
 
@@ -27,14 +31,14 @@ public final class OutputView {
     }
 
     public static void printWinningResult(WinningResultDto winningResultDto, double rateOfReturn) {
-        Map<Integer, Integer> result = winningResultDto.getResultCount();
+        EnumMap<LottoRank, Integer> rankCountMap = winningResultDto.getRankCountMap();
         System.out.println(LOTTO_RESULT_SUBJECT);
         System.out.println(LINE_DELIMITER);
-        System.out.println("3개 일치 (5,000원) - " + result.getOrDefault(3, 0) + "개");
-        System.out.println("4개 일치 (50,000원) - " + result.getOrDefault(4, 0) + "개");
-        System.out.println("5개 일치 (1,500,000원) - " + result.getOrDefault(5, 0) + "개");
-        System.out.println("5개 일치, 보너스 볼 일치 (30,000,000원) - " + winningResultDto.getBonus() + "개");
-        System.out.println("6개 일치 (2,000,000,000원) - " + result.getOrDefault(6, 0) + "개");
+        System.out.println("3개 일치 (5,000원) - " + rankCountMap.getOrDefault(FIFTH_RANK, 0) + "개");
+        System.out.println("4개 일치 (50,000원) - " + rankCountMap.getOrDefault(FOURTH_RANK, 0) + "개");
+        System.out.println("5개 일치 (1,500,000원) - " + rankCountMap.getOrDefault(THIRD_RANK, 0) + "개");
+        System.out.println("5개 일치, 보너스 볼 일치 (30,000,000원) - " + rankCountMap.getOrDefault(SECOND_RANK, 0) + "개");
+        System.out.println("6개 일치 (2,000,000,000원) - " + rankCountMap.getOrDefault(FIRST_RANK, 0) + "개");
         System.out.println("총 수익률은 " + rateOfReturn + "%입니다.");
     }
 

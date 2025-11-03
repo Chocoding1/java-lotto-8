@@ -1,38 +1,41 @@
 package lotto.model.dto;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import lotto.model.domain.CompareResult;
+import java.util.EnumMap;
+import lotto.model.domain.LottoRank;
 
 public class WinningResultDto {
 
-    private final Map<Integer, Integer> resultCount = new HashMap<>();
-    private int bonus = 0;
+    private final EnumMap<LottoRank, Integer> rankCountMap;
+//    private int bonus = 0;
 
-    public Map<Integer, Integer> getResultCount() {
-        return resultCount;
+    public WinningResultDto(EnumMap<LottoRank, Integer> rankCountMap) {
+        this.rankCountMap = rankCountMap;
     }
 
-    public int getBonus() {
-        return bonus;
+    public EnumMap<LottoRank, Integer> getRankCountMap() {
+        return rankCountMap;
     }
 
-    public void getResultForView(List<CompareResult> compareResults) {
-        for (CompareResult compareResult : compareResults) {
-            int matchCount = compareResult.getMatchCount();
-            boolean bonusMatch = compareResult.isBonusMatch();
+    //
+//    public int getBonus() {
+//        return bonus;
+//    }
 
-            if (matchCount < 3) {
-                continue;
-            }
-
-            if (matchCount == 6 && bonusMatch) {
-                bonus++;
-                continue;
-            }
-
-            resultCount.put(matchCount, resultCount.getOrDefault(matchCount, 0) + 1);
-        }
-    }
+//    public void getResultForView(List<CompareResult> compareResults) {
+//        for (CompareResult compareResult : compareResults) {
+//            int matchCount = compareResult.getMatchCount();
+//            boolean bonusMatch = compareResult.isBonusMatch();
+//
+//            if (matchCount < 3) {
+//                continue;
+//            }
+//
+//            if (matchCount == 6 && bonusMatch) {
+//                bonus++;
+//                continue;
+//            }
+//
+//            resultCount.put(matchCount, resultCount.getOrDefault(matchCount, 0) + 1);
+//        }
+//    }
 }
