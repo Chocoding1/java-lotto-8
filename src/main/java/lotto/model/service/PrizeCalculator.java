@@ -1,5 +1,16 @@
 package lotto.model.service;
 
+import static lotto.model.constant.LottoConstant.BONUS_MATCH_PRIZE;
+import static lotto.model.constant.LottoConstant.FIVE_MATCH;
+import static lotto.model.constant.LottoConstant.FIVE_MATCH_PRIZE;
+import static lotto.model.constant.LottoConstant.FOUR_MATCH;
+import static lotto.model.constant.LottoConstant.FOUR_MATCH_PRIZE;
+import static lotto.model.constant.LottoConstant.NOT_WINNING_PRIZE;
+import static lotto.model.constant.LottoConstant.SIX_MATCH;
+import static lotto.model.constant.LottoConstant.SIX_MATCH_PRIZE;
+import static lotto.model.constant.LottoConstant.THREE_MATCH;
+import static lotto.model.constant.LottoConstant.THREE_MATCH_PRIZE;
+
 import java.util.List;
 import java.util.Map;
 import lotto.model.domain.CompareResult;
@@ -7,17 +18,7 @@ import lotto.model.domain.PurchasePrice;
 
 public class PrizeCalculator {
 
-    private static final int ZERO_MATCH = 0;
-    private static final int THREE_MATCH = 3;
-    private static final int FOUR_MATCH = 4;
-    private static final int FIVE_MATCH = 5;
-    private static final int SIX_MATCH = 6;
-
-    private static final int THREE_MATCH_PRIZE = 5000;
-    private static final int FOUR_MATCH_PRIZE = 50000;
-    private static final int FIVE_MATCH_PRIZE = 1500000;
-    private static final int BONUS_MATCH_PRIZE = 30000000;
-    private static final int SIX_MATCH_PRIZE = 2000000000;
+    private static final int NUMBER_FOR_PERCENT = 100;
 
     private final Map<Integer, Integer> prizeTable = Map.of(
             THREE_MATCH, THREE_MATCH_PRIZE,
@@ -40,11 +41,11 @@ public class PrizeCalculator {
     private int getPrize(CompareResult compareResult) {
         int matchCount = compareResult.getMatchCount();
 
-        if (matchCount < 3) {
-            return ZERO_MATCH;
+        if (matchCount < THREE_MATCH) {
+            return NOT_WINNING_PRIZE;
         }
 
-        if (matchCount == 6 && compareResult.isBonusMatch()) {
+        if (matchCount == SIX_MATCH && compareResult.isBonusMatch()) {
             return BONUS_MATCH_PRIZE;
         }
 
@@ -52,6 +53,6 @@ public class PrizeCalculator {
     }
 
     private double calculateProfitRate(int totalPrize, PurchasePrice purchasePrice) {
-        return (double) totalPrize / purchasePrice.getPrice() * 100;
+        return (double) totalPrize / purchasePrice.getPrice() * NUMBER_FOR_PERCENT;
     }
 }
