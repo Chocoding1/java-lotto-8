@@ -5,7 +5,7 @@ import static lotto.util.RetryUtil.*;
 import java.util.Arrays;
 import java.util.List;
 import lotto.model.domain.CompareResult;
-import lotto.model.dto.ResultForView;
+import lotto.model.dto.WinningResultDto;
 import lotto.model.service.LottoComparator;
 import lotto.model.service.lottopublisher.LottoPublisher;
 import lotto.model.service.prizecalculator.PrizeCalculator;
@@ -57,15 +57,11 @@ public class LottoController {
     private PublishedLotto publishAndPrintLotto(PurchasePrice purchasePrice) {
         PublishedLotto publishedLotto = lottoPublisher.publishLotto(purchasePrice);
 
-        PublishedLottoDto publishedLottoDto = convertToPublishedLottoDto(publishedLotto);
+        PublishedLottoDto publishedLottoDto = new PublishedLottoDto(publishedLotto);
 
         OutputView.printPublishedResult(publishedLottoDto);
 
         return publishedLotto;
-    }
-
-    private PublishedLottoDto convertToPublishedLottoDto(PublishedLotto publishedLotto) {
-        return PublishedLottoDto.of(publishedLotto.getLottoCount(), publishedLotto.getLottos());
     }
 
     private WinningLotto getWinningLotto() {
@@ -109,8 +105,8 @@ public class LottoController {
     }
 
     private static void printLottoResult(List<CompareResult> compareResults, double profitRate) {
-        ResultForView resultForView = new ResultForView();
-        resultForView.getResultForView(compareResults);
-        OutputView.printWinningResult(resultForView, profitRate);
+        WinningResultDto winningResultDto = new WinningResultDto();
+        winningResultDto.getResultForView(compareResults);
+        OutputView.printWinningResult(winningResultDto, profitRate);
     }
 }

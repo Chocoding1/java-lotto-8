@@ -2,19 +2,16 @@ package lotto.model.dto;
 
 import java.util.List;
 import lotto.model.domain.Lotto;
+import lotto.model.domain.PublishedLotto;
 
 public class PublishedLottoDto {
 
     private final int lottoCount;
     private final List<Lotto> lottos;
 
-    private PublishedLottoDto(int lottoCount, List<Lotto> lottos) {
-        this.lottoCount = lottoCount;
-        this.lottos = lottos;
-    }
-
-    public static PublishedLottoDto of(int lottoCount, List<Lotto> lottos) {
-        return new PublishedLottoDto(lottoCount, lottos);
+    public PublishedLottoDto(PublishedLotto publishedLotto) {
+        this.lottoCount = publishedLotto.getLottoCount();
+        this.lottos = publishedLotto.getLottos();
     }
 
     public int getLottoCount() {
