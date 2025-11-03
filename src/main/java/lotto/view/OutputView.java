@@ -4,7 +4,6 @@ import static lotto.model.domain.LottoRank.*;
 
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.model.domain.LottoRank;
 import lotto.model.dto.WinningResultDto;

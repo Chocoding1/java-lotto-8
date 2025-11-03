@@ -5,7 +5,6 @@ import static lotto.util.RetryUtil.*;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
-import lotto.model.domain.CompareResult;
 import lotto.model.domain.LottoRank;
 import lotto.model.dto.WinningResultDto;
 import lotto.model.service.LottoComparator;
