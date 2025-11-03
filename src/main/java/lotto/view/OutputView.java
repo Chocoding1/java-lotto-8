@@ -1,7 +1,7 @@
 package lotto.view;
 
 import java.util.Map;
-import lotto.model.domain.Lotto;
+import lotto.Lotto;
 import lotto.model.dto.ResultForView;
 import lotto.model.dto.PublishedLottoDto;
 

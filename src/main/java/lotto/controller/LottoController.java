@@ -1,10 +1,8 @@
 package lotto.controller;
 
-import static lotto.util.RetryUtils.*;
-
 import java.util.List;
 import lotto.model.domain.CompareResult;
-import lotto.model.domain.Lotto;
+import lotto.Lotto;
 import lotto.model.dto.ResultForView;
 import lotto.model.service.LottoComparator;
 import lotto.model.service.LottoPublisher;
@@ -14,9 +12,9 @@ import lotto.model.domain.PurchasePrice;
 import lotto.model.domain.WinningLotto;
 import lotto.model.converter.LottoConverter;
 import lotto.model.dto.PublishedLottoDto;
-import lotto.util.InputUtils;
+import lotto.util.InputUtil;
 import lotto.model.validator.LottoNumberValidator;
-import lotto.util.RetryUtils;
+import lotto.exception.ExceptionHandler;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -26,21 +24,21 @@ public class LottoController {
     private final LottoComparator lottoComparator;
     private final LottoConverter lottoConverter;
     private final PrizeCalculator prizeCalculator;
-    private final RetryUtils retryUtils;
+    private final ExceptionHandler exceptionHandler;
 
     public LottoController(LottoPublisher lottoPublisher, LottoComparator lottoComparator,
-                           LottoConverter lottoConverter, PrizeCalculator prizeCalculator, RetryUtils retryUtils) {
+                           LottoConverter lottoConverter, PrizeCalculator prizeCalculator,
+                           ExceptionHandler exceptionHandler) {
         this.lottoPublisher = lottoPublisher;
         this.lottoComparator = lottoComparator;
         this.lottoConverter = lottoConverter;
         this.prizeCalculator = prizeCalculator;
-        this.retryUtils = retryUtils;
-
+        this.exceptionHandler = exceptionHandler;
     }
 
     public void playLotto() {
         // 로또 구입 금액 입력
-        PurchasePrice purchasePrice = retryUtils.tryReturnUntilSuccess(this::getPurchasePrice);
+        PurchasePrice purchasePrice = exceptionHandler.tryReturnUntilSuccess(this::getPurchasePrice);
 
         // 로또 발행 및 출력
         PublishedLotto publishedLotto = publishAndPrintLotto(purchasePrice);
@@ -62,7 +60,7 @@ public class LottoController {
     private PurchasePrice getPurchasePrice() {
         String initialPrice = InputView.getPurchasePrice();
 
-        int convertedPrice = InputUtils.convertToInt(initialPrice);
+        int convertedPrice = InputUtil.convertToInt(initialPrice);
 
         return new PurchasePrice(convertedPrice);
     }
@@ -82,11 +80,11 @@ public class LottoController {
     }
 
     private WinningLotto getWinningLotto() {
-        Lotto winningLottoNumbers = retryUtils.tryReturnUntilSuccess(this::getWinningNumbers);
+        Lotto winningLottoNumbers = exceptionHandler.tryReturnUntilSuccess(this::getWinningNumbers);
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
 
-        retryUtils.tryRunUntilSuccess(() -> addBonusNumber(winningLotto));
+        exceptionHandler.tryRunUntilSuccess(() -> addBonusNumber(winningLotto));
 
         return winningLotto;
     }
@@ -105,7 +103,7 @@ public class LottoController {
 
     private int getBonusNumber() {
         String initialBonusNumber = InputView.getBonusNumber();
-        int bonusNumber = InputUtils.convertToInt(initialBonusNumber);
+        int bonusNumber = InputUtil.convertToInt(initialBonusNumber);
 
         LottoNumberValidator.validateNumber(bonusNumber);
 

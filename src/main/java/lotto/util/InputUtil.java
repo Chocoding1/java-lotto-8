@@ -2,9 +2,9 @@ package lotto.util;
 
 import static lotto.exception.ErrorMessage.INPUT_VALUE_NOT_INTEGER;
 
-public final class InputUtils {
+public final class InputUtil {
 
-    private InputUtils() {
+    private InputUtil() {
     }
 
     public static int convertToInt(String inputValue) {

@@ -2,7 +2,7 @@ package lotto.model.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.model.domain.Lotto;
+import lotto.Lotto;
 import lotto.model.domain.PublishedLotto;
 import lotto.model.domain.PurchasePrice;
 
