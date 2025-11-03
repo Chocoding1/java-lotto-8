@@ -1,6 +1,4 @@
-package lotto.model.domain;
-
-import static org.junit.jupiter.api.Assertions.*;
+package lotto.model.domain.lotto;
 
 import java.util.List;
 import org.assertj.core.api.Assertions;

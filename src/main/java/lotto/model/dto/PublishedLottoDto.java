@@ -8,9 +8,11 @@ public class PublishedLottoDto {
 
     private final int lottoCount;
     private final List<Lotto> lottos;
+    private final List<List<Integer>> lottoNumbers;
 
     public PublishedLottoDto(PublishedLotto publishedLotto) {
         this.lottoCount = publishedLotto.getLottoCount();
+        convertToInts(publishedLotto);
         this.lottos = publishedLotto.getLottos();
     }
 
@@ -20,5 +22,10 @@ public class PublishedLottoDto {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    private void convertToInts(PublishedLotto publishedLotto) {
+        publishedLotto.getLottos().stream()
+                .map(Lotto::get)
     }
 }

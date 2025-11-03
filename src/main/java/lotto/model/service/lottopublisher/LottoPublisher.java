@@ -1,10 +1,9 @@
 package lotto.model.service.lottopublisher;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-import lotto.model.domain.Lotto;
-import lotto.model.domain.PublishedLotto;
+import lotto.model.domain.lotto.Lotto;
+import lotto.model.domain.lotto.PublishedLotto;
 import lotto.model.domain.PurchasePrice;
 
 public class LottoPublisher {

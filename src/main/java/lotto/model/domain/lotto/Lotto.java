@@ -1,4 +1,4 @@
-package lotto.model.domain;
+package lotto.model.domain.lotto;
 
 import static lotto.model.constant.ErrorMessage.LOTTO_CONTAINS_DUPLICATE_NUMBERS;
 import static lotto.model.constant.ErrorMessage.INVALID_LOTTO_LENGTH;
@@ -6,7 +6,6 @@ import static lotto.model.constant.LottoConstant.LOTTO_LENGTH;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -55,12 +54,4 @@ public class Lotto {
                 .sorted()
                 .toList();
     }
-
-//    @Override
-//    public String toString() {
-//        return numbers.stream()
-//                .sorted()
-//                .map(String::valueOf)
-//                .collect(Collectors.joining(", ", "[", "]"));
-//    }
 }
