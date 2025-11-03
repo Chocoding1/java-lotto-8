@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import lotto.model.domain.CompareResult;
 
-public class ResultForView {
+public class WinningResultDto {
 
     private final Map<Integer, Integer> resultCount = new HashMap<>();
     private int bonus = 0;
