@@ -2,6 +2,7 @@ package lotto.model.service.lottopublisher;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 import lotto.model.domain.Lotto;
 import lotto.model.domain.PublishedLotto;
 import lotto.model.domain.PurchasePrice;
@@ -17,10 +18,10 @@ public class LottoPublisher {
     public PublishedLotto publishLotto(PurchasePrice purchasePrice) {
         int quantity = purchasePrice.getLottoQuantity();
 
-        List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < quantity; i++) {
-            lottos.add(createLotto());
-        }
+        List<Lotto> lottos = IntStream.range(0, quantity)
+                .mapToObj(i -> createLotto())
+                .toList();
+
         return new PublishedLotto(lottos);
     }
 
