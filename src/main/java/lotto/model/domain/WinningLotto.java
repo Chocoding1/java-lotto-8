@@ -6,10 +6,17 @@ import java.util.List;
 
 public class WinningLotto extends Lotto {
 
-    private final int bonusNumber;
+    private int bonusNumber;
 
-    public WinningLotto(List<Integer> numbers, int bonusNumber) {
+    public WinningLotto(List<Integer> numbers) {
         super(numbers);
+    }
+
+    public int getBonusNumber() {
+        return bonusNumber;
+    }
+
+    public void addBonusNumber(int bonusNumber) {
         validateDuplicateNumber(bonusNumber);
         this.bonusNumber = bonusNumber;
     }
@@ -18,14 +25,5 @@ public class WinningLotto extends Lotto {
         if (getNumbers().contains(bonusNumber)) {
             throw new IllegalArgumentException(DUPLICATE_NUMBER_IN_LOTTO);
         }
-    }
-
-//    public void addBonusNumber(int bonusNumber) {
-//        lotto.validateDuplicateNumber(bonusNumber);
-//        this.bonusNumber = bonusNumber;
-//    }
-
-    public int getBonusNumber() {
-        return bonusNumber;
     }
 }
