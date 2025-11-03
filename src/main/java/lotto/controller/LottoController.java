@@ -1,8 +1,8 @@
 package lotto.controller;
 
+import java.util.Arrays;
 import java.util.List;
 import lotto.model.domain.CompareResult;
-import lotto.model.domain.Lotto;
 import lotto.model.dto.ResultForView;
 import lotto.model.service.LottoComparator;
 import lotto.model.service.lottopublisher.LottoPublisher;
@@ -77,19 +77,26 @@ public class LottoController {
     }
 
     private WinningLotto getWinningLotto() {
-        Lotto winningLottoNumbers = RetryUtil.tryReturnUntilSuccess(this::getWinningNumbers);
+        List<Integer> winningNumbers = RetryUtil.tryReturnUntilSuccess(this::getWinningNumbers);
 
-        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers);
 
         RetryUtil.tryRunUntilSuccess(() -> addBonusNumber(winningLotto));
 
         return winningLotto;
     }
 
-    private Lotto getWinningNumbers() {
+    private List<Integer> getWinningNumbers() {
         String initialWinningNumbers = InputView.getWinningNumbers();
 
-        return lottoConverter.convertToLotto(initialWinningNumbers);
+        return convertToIntsAndValidate(initialWinningNumbers);
+    }
+
+    private List<Integer> convertToIntsAndValidate(String initialWinningNumbers) {
+        return Arrays.stream(initialWinningNumbers.split(","))
+                .map(InputUtil::convertToInt)
+                .peek(LottoNumberValidator::validateNumber)
+                .toList();
     }
 
     private void addBonusNumber(WinningLotto winningLotto) {
