@@ -16,6 +16,7 @@ import lotto.model.converter.LottoConverter;
 import lotto.model.dto.PublishedLottoDto;
 import lotto.util.InputUtils;
 import lotto.model.validator.LottoNumberValidator;
+import lotto.util.RetryUtils;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -25,18 +26,21 @@ public class LottoController {
     private final LottoComparator lottoComparator;
     private final LottoConverter lottoConverter;
     private final PrizeCalculator prizeCalculator;
+    private final RetryUtils retryUtils;
 
     public LottoController(LottoPublisher lottoPublisher, LottoComparator lottoComparator,
-                           LottoConverter lottoConverter, PrizeCalculator prizeCalculator) {
+                           LottoConverter lottoConverter, PrizeCalculator prizeCalculator, RetryUtils retryUtils) {
         this.lottoPublisher = lottoPublisher;
         this.lottoComparator = lottoComparator;
         this.lottoConverter = lottoConverter;
         this.prizeCalculator = prizeCalculator;
+        this.retryUtils = retryUtils;
+
     }
 
     public void playLotto() {
         // 로또 구입 금액 입력
-        PurchasePrice purchasePrice = tryReturnUntilSuccess(this::getPurchasePrice);
+        PurchasePrice purchasePrice = retryUtils.tryReturnUntilSuccess(this::getPurchasePrice);
 
         // 로또 발행 및 출력
         PublishedLotto publishedLotto = publishAndPrintLotto(purchasePrice);
@@ -78,11 +82,11 @@ public class LottoController {
     }
 
     private WinningLotto getWinningLotto() {
-        Lotto winningLottoNumbers = tryReturnUntilSuccess(this::getWinningNumbers);
+        Lotto winningLottoNumbers = retryUtils.tryReturnUntilSuccess(this::getWinningNumbers);
 
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers);
 
-        tryRunUntilSuccess(() -> addBonusNumber(winningLotto));
+        retryUtils.tryRunUntilSuccess(() -> addBonusNumber(winningLotto));
 
         return winningLotto;
     }
