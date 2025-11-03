@@ -2,7 +2,7 @@ package lotto.util;
 
 import java.util.function.Supplier;
 
-public class RetryUtils {
+public class ExceptionHandler {
 
     public <T> T tryReturnUntilSuccess(Supplier<T> supplier) {
         while (true) {
