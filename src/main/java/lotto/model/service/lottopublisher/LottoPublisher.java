@@ -8,6 +8,8 @@ import lotto.model.domain.PurchasePrice;
 
 public class LottoPublisher {
 
+    private final static int START_NUMBER = 0;
+
     private final LottoNumberExtractor lottoNumberExtractor;
 
     public LottoPublisher(LottoNumberExtractor lottoNumberExtractor) {
@@ -17,7 +19,7 @@ public class LottoPublisher {
     public PublishedLotto publishLotto(PurchasePrice purchasePrice) {
         int quantity = purchasePrice.getLottoQuantity();
 
-        List<Lotto> lottos = IntStream.range(0, quantity)
+        List<Lotto> lottos = IntStream.range(START_NUMBER, quantity)
                 .mapToObj(i -> createLotto())
                 .toList();
 
