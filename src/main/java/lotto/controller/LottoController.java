@@ -14,7 +14,7 @@ import lotto.model.domain.PurchasePrice;
 import lotto.model.domain.WinningLotto;
 import lotto.model.dto.PublishedLottoDto;
 import lotto.util.InputUtil;
-import lotto.model.validator.LottoNumberValidator;
+import lotto.util.LottoNumberUtil;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -89,7 +89,7 @@ public class LottoController {
     private List<Integer> convertToIntsAndValidate(String initialWinningNumbers) {
         return Arrays.stream(initialWinningNumbers.split(","))
                 .map(InputUtil::convertToInt)
-                .peek(LottoNumberValidator::validateNumber)
+                .peek(LottoNumberUtil::validateNumber)
                 .toList();
     }
 
@@ -103,7 +103,7 @@ public class LottoController {
         String initialBonusNumber = InputView.getBonusNumber();
         int bonusNumber = InputUtil.convertToInt(initialBonusNumber);
 
-        LottoNumberValidator.validateNumber(bonusNumber);
+        LottoNumberUtil.validateNumber(bonusNumber);
 
         return bonusNumber;
     }
