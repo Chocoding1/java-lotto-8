@@ -8,8 +8,9 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        Collections.sort(numbers);
-        this.numbers = List.copyOf(numbers);
+        this.numbers = numbers.stream()
+                .sorted()
+                .toList();
     }
 
     public List<Integer> getNumbers() {
