@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.model.IssuedLotto;
 import lotto.model.LottoMachine;
 import lotto.model.PurchasePrice;
+import lotto.model.WinningNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -22,6 +23,7 @@ public class LottoController {
         PurchasePrice purchasePrice = getPurchasePrice();
         IssuedLotto issuedLotto = issueLotto(purchasePrice);
         printIssuedResult(issuedLotto);
+        WinningNumber winningNumber = getWinningNumber();
     }
 
     private IssuedLotto issueLotto(PurchasePrice purchasePrice) {
@@ -35,5 +37,10 @@ public class LottoController {
 
     private void printIssuedResult(IssuedLotto issuedLotto) {
         outputView.printIssuedResult(issuedLotto);
+    }
+
+    private WinningNumber getWinningNumber() {
+        String winningNumber = inputView.getWinningNumber();
+        return new WinningNumber(winningNumber);
     }
 }
