@@ -2,12 +2,18 @@ package lotto.model;
 
 public class PurchasePrice {
 
+    private static final int LOTTO_PRICE = 1000;
+
     private final int price;
 
     public PurchasePrice(String initialPrice) {
         int price = convertToInt(initialPrice);
         validateUnits(price);
         this.price = price;
+    }
+
+    public int getIssueCount() {
+        return price / LOTTO_PRICE;
     }
 
     private int convertToInt(String initialPrice) {
