@@ -1,8 +1,10 @@
 package lotto.controller;
 
+import lotto.model.BonusNumber;
 import lotto.model.IssuedLotto;
 import lotto.model.LottoMachine;
 import lotto.model.PurchasePrice;
+import lotto.model.WinningLotto;
 import lotto.model.WinningNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -24,6 +26,8 @@ public class LottoController {
         IssuedLotto issuedLotto = issueLotto(purchasePrice);
         printIssuedResult(issuedLotto);
         WinningNumber winningNumber = getWinningNumber();
+        BonusNumber bonusNumber = getBonusNumber();
+        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
     }
 
     private IssuedLotto issueLotto(PurchasePrice purchasePrice) {
@@ -42,5 +46,9 @@ public class LottoController {
     private WinningNumber getWinningNumber() {
         String winningNumber = inputView.getWinningNumber();
         return new WinningNumber(winningNumber);
+    }
+
+    private BonusNumber getBonusNumber() {
+        return new BonusNumber(inputView.getBonusNumber());
     }
 }

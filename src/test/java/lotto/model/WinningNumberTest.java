@@ -1,9 +1,7 @@
 package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -54,6 +52,19 @@ class WinningNumberTest {
 
         //when & then
         assertThatThrownBy(() -> new WinningNumber(invalidNumbers))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @Test
+    @DisplayName("보너스 번호가 당첨 번호와 중복될 경우 예외 발생")
+    void validateDuplicate_fail_when_bonusNumber_in_winningNumber() {
+        //given
+        WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
+        BonusNumber duplicatedBonusNumber = new BonusNumber("5");
+
+        //when & then
+        assertThatThrownBy(() -> winningNumber.validateDuplicate(duplicatedBonusNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
