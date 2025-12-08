@@ -1,5 +1,7 @@
 package lotto.controller;
 
+import static lotto.util.ExceptionHandler.*;
+
 import java.util.EnumMap;
 import lotto.model.BonusNumber;
 import lotto.model.IssuedLotto;
@@ -9,7 +11,9 @@ import lotto.model.PrizeCalculator;
 import lotto.model.PurchasePrice;
 import lotto.model.WinningGrade;
 import lotto.model.WinningLotto;
+import lotto.model.WinningLottoGenerator;
 import lotto.model.WinningNumber;
+import lotto.util.ExceptionHandler;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -31,12 +35,10 @@ public class LottoController {
     }
 
     public void run() {
-        PurchasePrice purchasePrice = getPurchasePrice();
+        PurchasePrice purchasePrice = wrappingSupplier(this::getPurchasePrice);
         IssuedLotto issuedLotto = issueLotto(purchasePrice);
         printIssuedResult(issuedLotto);
-        WinningNumber winningNumber = getWinningNumber();
-        BonusNumber bonusNumber = getBonusNumber();
-        WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
+        WinningLotto winningLotto = createWinningLotto();
         EnumMap<WinningGrade, Integer> result = lottoComparator.compare(issuedLotto, winningLotto);
         double rateOfReturn = prizeCalculator.calculate(purchasePrice, result);
         outputView.printWinningResult(result, rateOfReturn);
@@ -53,6 +55,15 @@ public class LottoController {
 
     private void printIssuedResult(IssuedLotto issuedLotto) {
         outputView.printIssuedResult(issuedLotto);
+    }
+
+    private WinningLotto createWinningLotto() {
+        WinningNumber winningNumber = wrappingSupplier(this::getWinningNumber);
+        WinningLottoGenerator generator = () -> {
+            BonusNumber bonusNumber = getBonusNumber();
+            return new WinningLotto(winningNumber, bonusNumber);
+        };
+        return wrappingGenerator(generator);
     }
 
     private WinningNumber getWinningNumber() {
