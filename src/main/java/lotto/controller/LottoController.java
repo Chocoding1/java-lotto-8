@@ -5,6 +5,7 @@ import lotto.model.BonusNumber;
 import lotto.model.IssuedLotto;
 import lotto.model.LottoComparator;
 import lotto.model.LottoMachine;
+import lotto.model.PrizeCalculator;
 import lotto.model.PurchasePrice;
 import lotto.model.WinningGrade;
 import lotto.model.WinningLotto;
@@ -18,13 +19,15 @@ public class LottoController {
     private final LottoMachine lottoMachine;
     private final OutputView outputView;
     private final LottoComparator lottoComparator;
+    private final PrizeCalculator prizeCalculator;
 
     public LottoController(InputView inputView, LottoMachine lottoMachine, OutputView outputView,
-                           LottoComparator lottoComparator) {
+                           LottoComparator lottoComparator, PrizeCalculator prizeCalculator) {
         this.inputView = inputView;
         this.lottoMachine = lottoMachine;
         this.outputView = outputView;
         this.lottoComparator = lottoComparator;
+        this.prizeCalculator = prizeCalculator;
     }
 
     public void run() {
@@ -35,6 +38,8 @@ public class LottoController {
         BonusNumber bonusNumber = getBonusNumber();
         WinningLotto winningLotto = new WinningLotto(winningNumber, bonusNumber);
         EnumMap<WinningGrade, Integer> result = lottoComparator.compare(issuedLotto, winningLotto);
+        double rateOfReturn = prizeCalculator.calculate(purchasePrice, result);
+        outputView.printWinningResult(result, rateOfReturn);
     }
 
     private IssuedLotto issueLotto(PurchasePrice purchasePrice) {

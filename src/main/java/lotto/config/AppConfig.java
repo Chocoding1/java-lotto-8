@@ -3,6 +3,7 @@ package lotto.config;
 import lotto.controller.LottoController;
 import lotto.model.LottoComparator;
 import lotto.model.LottoMachine;
+import lotto.model.PrizeCalculator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -13,10 +14,12 @@ public class AppConfig {
     private LottoMachine lottoMachine;
     private OutputView outputView;
     private LottoComparator lottoComparator;
+    private PrizeCalculator prizeCalculator;
 
     public LottoController lottoController() {
         if (lottoController == null) {
-            lottoController = new LottoController(inputView(), lottoMachine(), outputView(), lottoComparator());
+            lottoController = new LottoController(inputView(), lottoMachine(), outputView(), lottoComparator(),
+                    prizeCalculator());
         }
         return lottoController;
     }
@@ -47,5 +50,12 @@ public class AppConfig {
             lottoComparator = new LottoComparator();
         }
         return lottoComparator;
+    }
+
+    private PrizeCalculator prizeCalculator() {
+        if (prizeCalculator == null) {
+            prizeCalculator = new PrizeCalculator();
+        }
+        return prizeCalculator;
     }
 }

@@ -12,6 +12,10 @@ public class PurchasePrice {
         this.price = price;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     public int getIssueCount() {
         return price / LOTTO_PRICE;
     }
