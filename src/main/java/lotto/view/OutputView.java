@@ -31,8 +31,7 @@ public class OutputView {
     public void printWinningResult(EnumMap<WinningGrade, Integer> result, double rateOfReturn) {
         System.out.println(WINNING_RESULT_TITLE);
         for (WinningGrade winningGrade : result.keySet()) {
-            System.out.println(winningGrade.getMatchCount() + "개 일치 (" + winningGrade.getPrize() + ") - " + result.get(
-                    winningGrade) + "개");
+            System.out.println(winningGrade.getNoticeMessage() + result.get(winningGrade) + "개");
         }
         System.out.printf(RATE_OF_RETURN_FORMAT, rateOfReturn);
     }
