@@ -51,12 +51,21 @@ public class WinningNumber {
 
     private void validateNumbers(Integer[] numbers) {
         validateCount(numbers);
+        validateNumberRange(numbers);
         validateDuplicatedNumber(numbers);
     }
 
     private void validateCount(Integer[] numbers) {
         if (numbers.length != WINNING_NUMBER_LENGTH) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호의 개수는 6개여야 합니다. 현재 개수: " + numbers.length);
+        }
+    }
+
+    private void validateNumberRange(Integer[] numbers) {
+        for (Integer number : numbers) {
+            if (number < 1 || 45 < number) {
+                throw new IllegalArgumentException("[ERROR] 당첨 번호는 1 ~ 45 사이의 숫자여야 합니다.");
+            }
         }
     }
 
