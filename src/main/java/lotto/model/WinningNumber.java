@@ -1,78 +1,75 @@
 package lotto.model;
 
+import static lotto.model.ErrorMessage.*;
+import static lotto.model.LottoConstants.*;
+
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
+/**
+ * 리팩토링 가이드
+ * https://chatgpt.com/s/t_69398c3e4db48191a6ad5acb9fc4cb5b
+ * https://chatgpt.com/s/t_693a163ac7888191862d1fe8f43dcb79
+ */
 public class WinningNumber {
 
     private static final String COMMA = ",";
-    private static final int WINNING_NUMBER_LENGTH = 6;
 
     private final List<Integer> numbers;
 
     public WinningNumber(String initialNumbers) {
-        this.numbers = parseNumbers(initialNumbers);
+        List<Integer> numbers = parseNumbers(initialNumbers);
+        validate(numbers);
+        this.numbers = List.copyOf(numbers);
     }
 
     public int getCount() {
         return numbers.size();
     }
 
-    public List<Integer> getNumbers() {
-        return numbers;
+    public boolean isContain(int number) {
+        return numbers.contains(number);
     }
 
-    public void validateDuplicate(BonusNumber bonusNumber) {
-        if (numbers.contains(bonusNumber.getNumber())) {
-            throw new IllegalArgumentException("[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.");
-        }
+    public int getMatchCount(Lotto lotto) {
+        return lotto.getMatchCount(numbers);
     }
 
     private List<Integer> parseNumbers(String initialNumbers) {
-        String[] tokens = initialNumbers.split(COMMA);
-        Integer[] numbers = convertToInt(tokens);
-        validateNumbers(numbers);
-        return Stream.of(numbers).toList();
-    }
-
-    private Integer[] convertToInt(String[] tokens) {
         try {
-            return Arrays.stream(tokens)
-                    .mapToInt(Integer::parseInt)
-                    .boxed()
-                    .toArray(Integer[]::new);
+            return Arrays.stream(initialNumbers.split(COMMA))
+                    .map(Integer::parseInt)
+                    .toList();
         } catch (Exception e) {
-            throw new IllegalArgumentException("[ERROR] 입력한 당첨 번호 내에 쉼표 외의 문자가 존재합니다.");
+            throw new IllegalArgumentException(ERROR_WINNING_NUMBER_NOT_INTEGER);
         }
     }
 
-    private void validateNumbers(Integer[] numbers) {
+    private void validate(List<Integer> numbers) {
         validateCount(numbers);
-        validateNumberRange(numbers);
+        validateRange(numbers);
         validateDuplicatedNumber(numbers);
     }
 
-    private void validateCount(Integer[] numbers) {
-        if (numbers.length != WINNING_NUMBER_LENGTH) {
-            throw new IllegalArgumentException("[ERROR] 당첨 번호의 개수는 6개여야 합니다. 현재 개수: " + numbers.length);
+    private void validateCount(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_SIZE) {
+            throw new IllegalArgumentException(ERROR_WINNING_NUMBER_INVALID_COUNT + numbers.size());
         }
     }
 
-    private void validateNumberRange(Integer[] numbers) {
+    private void validateRange(List<Integer> numbers) {
         for (Integer number : numbers) {
-            if (number < 1 || 45 < number) {
-                throw new IllegalArgumentException("[ERROR] 당첨 번호는 1 ~ 45 사이의 숫자여야 합니다.");
+            if (number < MIN_NUMBER || MAX_NUMBER < number) {
+                throw new IllegalArgumentException(ERROR_WINNING_NUMBER_OUT_OF_RANGE);
             }
         }
     }
 
-    private void validateDuplicatedNumber(Integer[] numbers) {
-        Set<Integer> nonDuplicatedNumbers = new HashSet<>(Arrays.asList(numbers));
-        if (numbers.length != nonDuplicatedNumbers.size()) {
-            throw new IllegalArgumentException("[ERROR] 입력한 당첨 번호 내에 중복된 숫자가 존재합니다.");
+    private void validateDuplicatedNumber(List<Integer> numbers) {
+        Set<Integer> nonDuplicatedNumbers = Set.copyOf(numbers);
+        if (numbers.size() != nonDuplicatedNumbers.size()) {
+            throw new IllegalArgumentException(ERROR_WINNING_NUMBER_DUPLICATE);
         }
     }
 }

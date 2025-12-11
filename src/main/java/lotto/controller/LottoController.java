@@ -2,7 +2,7 @@ package lotto.controller;
 
 import static lotto.util.ExceptionHandler.*;
 
-import java.util.EnumMap;
+import java.util.Map;
 import lotto.model.BonusNumber;
 import lotto.model.IssuedLotto;
 import lotto.model.LottoComparator;
@@ -13,7 +13,6 @@ import lotto.model.WinningGrade;
 import lotto.model.WinningLotto;
 import lotto.model.WinningLottoGenerator;
 import lotto.model.WinningNumber;
-import lotto.util.ExceptionHandler;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -39,8 +38,8 @@ public class LottoController {
         IssuedLotto issuedLotto = issueLotto(purchasePrice);
         printIssuedResult(issuedLotto);
         WinningLotto winningLotto = createWinningLotto();
-        EnumMap<WinningGrade, Integer> result = lottoComparator.compare(issuedLotto, winningLotto);
-        double rateOfReturn = prizeCalculator.calculate(purchasePrice, result);
+        Map<WinningGrade, Integer> result = lottoComparator.compare(issuedLotto, winningLotto);
+        double rateOfReturn = prizeCalculator.calculateReturnOfRate(purchasePrice, result);
         outputView.printWinningResult(result, rateOfReturn);
     }
 

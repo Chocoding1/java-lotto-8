@@ -1,9 +1,9 @@
 package lotto.view;
 
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-import lotto.Lotto;
+import lotto.model.Lotto;
 import lotto.model.IssuedLotto;
 import lotto.model.WinningGrade;
 
@@ -28,7 +28,7 @@ public class OutputView {
         System.out.println(sb);
     }
 
-    public void printWinningResult(EnumMap<WinningGrade, Integer> result, double rateOfReturn) {
+    public void printWinningResult(Map<WinningGrade, Integer> result, double rateOfReturn) {
         System.out.println(WINNING_RESULT_TITLE);
         for (WinningGrade winningGrade : result.keySet()) {
             System.out.println(winningGrade.getNoticeMessage() + result.get(winningGrade) + "개");

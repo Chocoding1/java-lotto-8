@@ -2,6 +2,8 @@ package lotto.model;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +43,20 @@ class BonusNumberTest {
 
         //when & then
         assertThatThrownBy(() -> new BonusNumber(initialBonusNumber))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @Test
+    @DisplayName("보너스 번호가 당첨 번호와 중복될 경우 예외 발생")
+    void create_bonusNumber_fail_when_bonusNumber_is_in_winningNumber() {
+        //given
+        WinningNumber winningNumber = new WinningNumber("1,2,3,4,5,6");
+        String duplicatedBonusNumber = "6";
+        BonusNumber bonusNumber = new BonusNumber(duplicatedBonusNumber);
+
+        //when & then
+        assertThatThrownBy(() -> bonusNumber.validateDuplicate(winningNumber))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("[ERROR]");
     }
