@@ -2,6 +2,8 @@ package lotto.model;
 
 public final class ErrorMessage {
 
+    public static final String ERROR_LOTTO_INVALID_COUNT = "[ERROR] 로또 번호는 6개여야 합니다.";
+
     public static final String ERROR_BONUS_NOT_INTEGER = "[ERROR] 보너스 번호는 정수 형태여야 합니다. 현재 보너스 번호: ";
     public static final String ERROR_BONUS_OUT_OF_RANGE = "[ERROR] 보너스 번호는 1 ~ 45 사이의 숫자여야 합니다.";
     public static final String ERROR_BONUS_DUPLICATE_NUMBER = "[ERROR] 보너스 번호는 당첨 번호와 중복될 수 없습니다.";
