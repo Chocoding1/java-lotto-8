@@ -3,6 +3,7 @@ package lotto.controller;
 import static lotto.util.ExceptionHandler.*;
 
 import java.util.Map;
+import java.util.function.Supplier;
 import lotto.model.BonusNumber;
 import lotto.model.IssuedLotto;
 import lotto.model.LottoComparator;
@@ -11,7 +12,6 @@ import lotto.model.PrizeCalculator;
 import lotto.model.PurchasePrice;
 import lotto.model.WinningGrade;
 import lotto.model.WinningLotto;
-import lotto.model.WinningLottoGenerator;
 import lotto.model.WinningNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -58,11 +58,11 @@ public class LottoController {
 
     private WinningLotto createWinningLotto() {
         WinningNumber winningNumber = wrappingSupplier(this::getWinningNumber);
-        WinningLottoGenerator generator = () -> {
+        Supplier<WinningLotto> supplier = () -> {
             BonusNumber bonusNumber = getBonusNumber();
             return new WinningLotto(winningNumber, bonusNumber);
         };
-        return wrappingGenerator(generator);
+        return wrappingSupplier(supplier);
     }
 
     private WinningNumber getWinningNumber() {
