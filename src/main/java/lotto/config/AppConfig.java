@@ -48,7 +48,6 @@ public class AppConfig {
         return lottoNumberGenerator;
     }
 
-
     private OutputView outputView() {
         if (outputView == null) {
             outputView = new OutputView();
