@@ -34,6 +34,18 @@ class PurchasePriceTest {
     }
 
     @Test
+    @DisplayName("구입 금액이 1000원 이하일 경우 예외 발생")
+    void create_PurchasePrice_fail_when_price_is_less_than_1000() {
+        //given
+        String initialPrice = "500";
+
+        //when & then
+        assertThatThrownBy(() -> new PurchasePrice(initialPrice))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("[ERROR]");
+    }
+
+    @Test
     @DisplayName("구입 금액이 1000원 단위가 아닐 경우 예외 발생")
     void create_PurchasePrice_fail_when_price_is_not_1000_units() {
         //given

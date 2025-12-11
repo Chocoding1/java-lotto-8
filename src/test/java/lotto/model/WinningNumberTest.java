@@ -45,10 +45,10 @@ class WinningNumberTest {
     }
 
     @Test
-    @DisplayName("당첨 번호 내에 중복된 숫자가 존재할 경우 예외 발생")
-    void create_winningNumber_fail_when_numbers_contain_duplicate_number() {
+    @DisplayName("당첨 번호 1~45 범위 밖의 숫자가 존재할 경우 예외 발생")
+    void create_winningNumber_fail_when_number_is_out_of_range() {
         //given
-        String invalidNumbers = "1,2,3,4,5,5";
+        String invalidNumbers = "1,2,3,4,5,50";
 
         //when & then
         assertThatThrownBy(() -> new WinningNumber(invalidNumbers))
@@ -57,10 +57,10 @@ class WinningNumberTest {
     }
 
     @Test
-    @DisplayName("당첨 번호 1~45 범위 밖의 숫자가 존재할 경우 예외 발생")
-    void create_winningNumber_fail_when_number_is_out_of_range() {
+    @DisplayName("당첨 번호 내에 중복된 숫자가 존재할 경우 예외 발생")
+    void create_winningNumber_fail_when_numbers_contain_duplicate_number() {
         //given
-        String invalidNumbers = "1,2,3,4,5,50";
+        String invalidNumbers = "1,2,3,4,5,5";
 
         //when & then
         assertThatThrownBy(() -> new WinningNumber(invalidNumbers))
