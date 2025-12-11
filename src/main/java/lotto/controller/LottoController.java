@@ -16,6 +16,13 @@ import lotto.model.WinningNumber;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+/**
+ * 리팩토링 가이드
+ * https://chatgpt.com/s/t_693ae134e5788191b4c3b40620a93c86
+ * https://chatgpt.com/s/t_693ae146fd108191986b3282dc16d7a1
+ * https://chatgpt.com/s/t_693ae16f84ec81919634e13ae406957c
+ * https://chatgpt.com/s/t_693ae177f73c8191903997abbef7cb5e
+ */
 public class LottoController {
 
     private final InputView inputView;
