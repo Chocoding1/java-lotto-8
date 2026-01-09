@@ -3,6 +3,7 @@ package lotto.model;
 public class PurchasePrice {
 
     private static final int LOTTO_PRICE_UNITS = 1000;
+    private static final int LOTTO_PRICE = 1000;
 
     private final int price;
 
@@ -10,6 +11,10 @@ public class PurchasePrice {
         int price = convertToInt(input);
         validatePrice(price);
         this.price = price;
+    }
+
+    public int lottoCount() {
+        return price / LOTTO_PRICE;
     }
 
     private int convertToInt(String input) {
