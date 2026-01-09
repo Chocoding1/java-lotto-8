@@ -24,8 +24,12 @@ public class LottoController {
         PurchasePrice purchasePrice = retryUntilSuccess(this::getPurchasePrice);
         PublishedLotto publishedLotto = LottoPublisher.publish(purchasePrice);
         outputView.printPublishedLotto(publishedLotto);
+        Lotto winningNumber = retryUntilSuccess(this::getWinningNumber);
+    }
+
+    private Lotto getWinningNumber() {
         String input = inputView.readWinningNumber();
-        Lotto winningNumber = LottoParser.parse(input);
+        return LottoParser.parse(input);
     }
 
     private PurchasePrice getPurchasePrice() {
