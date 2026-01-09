@@ -8,7 +8,6 @@ public class LottoParser {
 
     private static final String COMMA = ",";
 
-
     public static Lotto parse(String input) {
         try {
             List<Integer> numbers = Arrays.stream(input.split(COMMA))
