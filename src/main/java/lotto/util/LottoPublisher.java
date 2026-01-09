@@ -1,8 +1,10 @@
-package lotto.model;
+package lotto.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.util.LottoNumberGenerator;
+import lotto.model.Lotto;
+import lotto.model.PublishedLotto;
+import lotto.model.PurchasePrice;
 
 public class LottoPublisher {
 
