@@ -2,7 +2,9 @@ package lotto.controller;
 
 import static lotto.exception.ExceptionHandler.retryUntilSuccess;
 
+import lotto.model.BonusNumber;
 import lotto.model.Lotto;
+import lotto.model.WinningLotto;
 import lotto.util.LottoParser;
 import lotto.util.LottoPublisher;
 import lotto.model.PublishedLotto;
@@ -24,7 +26,17 @@ public class LottoController {
         PurchasePrice purchasePrice = retryUntilSuccess(this::getPurchasePrice);
         PublishedLotto publishedLotto = LottoPublisher.publish(purchasePrice);
         outputView.printPublishedLotto(publishedLotto);
+        WinningLotto winningLotto = getWinningLotto();
+    }
+
+    private PurchasePrice getPurchasePrice() {
+        String input = inputView.readPurchasePrice();
+        return new PurchasePrice(input);
+    }
+
+    private WinningLotto getWinningLotto() {
         Lotto winningNumber = retryUntilSuccess(this::getWinningNumber);
+        return retryUntilSuccess(() -> createWinningLotto(winningNumber));
     }
 
     private Lotto getWinningNumber() {
@@ -32,8 +44,13 @@ public class LottoController {
         return LottoParser.parse(input);
     }
 
-    private PurchasePrice getPurchasePrice() {
-        String input = inputView.readPurchasePrice();
-        return new PurchasePrice(input);
+    private WinningLotto createWinningLotto(Lotto winningNumber) {
+        BonusNumber bonusNumber = getBonusNumber();
+        return new WinningLotto(winningNumber, bonusNumber);
+    }
+
+    private BonusNumber getBonusNumber() {
+        String input = inputView.readBonusNumber();
+        return new BonusNumber(input);
     }
 }
