@@ -21,7 +21,7 @@ public class PurchasePrice {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 구입금액은 정수 형태로 입력해 주세요.");
+            throw new IllegalArgumentException("[ERROR] 구입금액은 정수 형태여야 합니다.");
         }
     }
 
