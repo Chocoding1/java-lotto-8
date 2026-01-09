@@ -32,6 +32,13 @@ public class Lotto {
         return numbers.contains(number);
     }
 
+    public int equalCount(Lotto lotto) {
+        return (int) numbers.stream()
+                .filter(lotto.numbers::contains)
+                .distinct()
+                .count();
+    }
+
     private void validate(List<Integer> numbers) {
         validateCount(numbers);
         validateNumberRange(numbers);

@@ -17,6 +17,10 @@ public class PurchasePrice {
         return price / LOTTO_PRICE;
     }
 
+    public double rateOfReturn(long totalPrize) {
+        return Math.round((price * 100.0 / totalPrize) * 10) / 10.0;
+    }
+
     private int convertToInt(String input) {
         try {
             return Integer.parseInt(input);

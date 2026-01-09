@@ -17,6 +17,10 @@ public class BonusNumber {
         return number;
     }
 
+    public boolean isContainIn(Lotto publishedLotto) {
+        return publishedLotto.isContain(number);
+    }
+
     private int convertToInt(String input) {
         try {
             return Integer.parseInt(input);

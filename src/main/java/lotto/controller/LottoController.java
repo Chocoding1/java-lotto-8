@@ -4,7 +4,9 @@ import static lotto.exception.ExceptionHandler.retryUntilSuccess;
 
 import lotto.model.BonusNumber;
 import lotto.model.Lotto;
+import lotto.model.LottoComparator;
 import lotto.model.WinningLotto;
+import lotto.model.WinningResult;
 import lotto.util.LottoParser;
 import lotto.util.LottoPublisher;
 import lotto.model.PublishedLotto;
@@ -27,6 +29,9 @@ public class LottoController {
         PublishedLotto publishedLotto = LottoPublisher.publish(purchasePrice);
         outputView.printPublishedLotto(publishedLotto);
         WinningLotto winningLotto = getWinningLotto();
+        LottoComparator lottoComparator = new LottoComparator(publishedLotto, winningLotto);
+        WinningResult winningResult = lottoComparator.compare();
+        double rateOfReturn = winningResult.rateOfReturn(purchasePrice);
     }
 
     private PurchasePrice getPurchasePrice() {
