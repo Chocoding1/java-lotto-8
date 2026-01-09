@@ -18,7 +18,7 @@ public class PurchasePrice {
     }
 
     public double rateOfReturn(long totalPrize) {
-        return Math.round((price * 100.0 / totalPrize) * 10) / 10.0;
+        return Math.round((totalPrize * 100.0 / price) * 10) / 10.0;
     }
 
     private int convertToInt(String input) {

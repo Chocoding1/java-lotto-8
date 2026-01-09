@@ -32,6 +32,7 @@ public class LottoController {
         LottoComparator lottoComparator = new LottoComparator(publishedLotto, winningLotto);
         WinningResult winningResult = lottoComparator.compare();
         double rateOfReturn = winningResult.rateOfReturn(purchasePrice);
+        outputView.printWinningResult(winningResult, rateOfReturn);
     }
 
     private PurchasePrice getPurchasePrice() {

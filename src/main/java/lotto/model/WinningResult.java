@@ -24,6 +24,10 @@ public class WinningResult {
         return purchasePrice.rateOfReturn(totalPrize);
     }
 
+    public int getMatchCount(WinningGrade winningGrade) {
+        return result.getOrDefault(winningGrade, 0);
+    }
+
     private long getTotalPrize() {
         long totalPrize = 0;
         for (WinningGrade winningGrade : result.keySet()) {
