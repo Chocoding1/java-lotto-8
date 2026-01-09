@@ -9,7 +9,6 @@ import java.util.Map;
  * https://chatgpt.com/s/t_693a190d65488191aa4251f0a8e3e27b
  * https://chatgpt.com/s/t_693a18e7be8481919066933a3bffba0f
  * https://chatgpt.com/s/t_693a18fcf53881918d49660b8137b349
- * https://chatgpt.com/s/t_693a18e7be8481919066933a3bffba0f
  */
 public enum WinningGrade {
 
